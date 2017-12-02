@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="testApplicationContext.xml" />
+
+    <bean name="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="activitiDataSource"/>
+        <property name="transactionManager" ref="activitiTransactionManager"/>
+        <property name="asyncExecutorActivate" value="false"/>
+        <property name="databaseSchemaUpdate" value="true"/>
+
+        <property name="jpaEntityManagerFactory" ref="defaultEntityManagerFactory" />
+        <property name="jpaCloseEntityManager" value="false" />
+        <property name="jpaHandleTransaction" value="false" />
+    </bean>
+
+    <bean name="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
+
+</beans>

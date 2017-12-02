@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <import resource="applicationContext.xml" />
+
+    <!--add support for device method argument resolver -->
+    <mvc:annotation-driven >
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <!--set mapping for public resources known as static resources in web app project.-->
+    <mvc:resources mapping="/jsp/*" location="/jsp/"      />
+    <!--<mvc:resources mapping="/css/*"  location="/jsp/css/"  />-->
+    <!--<mvc:resources mapping="/img/*"  location="/jsp/img/"  />-->
+    <!--<mvc:resources mapping="/js/*"   location="/jsp/js/"   />-->
+
+    <mvc:resources mapping="/template/**" location="/template/"      />
+    <mvc:resources mapping="/css/**"  location="/template/css/"  />
+    <mvc:resources mapping="/img/**"  location="/template/img/"  />
+    <mvc:resources mapping="/js/**"  location="/template/js/"  />
+
+
+    <mvc:resources mapping="/jsp/img/*"  location="/jsp/img/"  />
+    <mvc:resources mapping="/jsp/css/*"   location="/jsp/css/"   />
+
+    <!--jsp support for view tech-->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
+        <!--<property name="cache" value="false" />-->
+        <!--<property name="cacheLimit" value="5" />-->
+        <!--<property name="prefix" value="/jsp/" />-->
+        <!--<property name="suffix" value=".jsp" />-->
+    <!--</bean>-->
+
+
+    <!--integrating thymeleaf view tech.-->
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <constructor-arg ref="servletContext"/>
+        <property name="prefix" value="/template/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+    </bean>
+
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring5.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+
+    <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>
+
+
+
+
+
+
+
+</beans>

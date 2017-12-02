@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <context:component-scan base-package="dz.cirtaflow.beans"   />
+    <context:component-scan base-package="dz.cirtaflow.web"     />
+    <context:component-scan base-package="dz.cirtaflow.services"    />
+    <context:component-scan base-package="dz.cirtaflow.repositories.bpmnRepository" />
+
+
+    <context:property-placeholder location="classpath:props.properties" file-encoding="UTF-8"
+                                  ignore-resource-not-found="false" ignore-unresolvable="false" />
+
+    <tx:annotation-driven transaction-manager="activitiTransactionManager"/>
+
+
+    <bean name="activitiDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driver.class.name}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="url" value="${url}"/>
+    </bean>
+
+    <bean name="activitiTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="activitiDataSource" />
+    </bean>
+
+    <bean name="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+        <property name="dataSource" ref="activitiDataSource" />
+        <property name="entityManagerFactory" ref="jpaEntityManagerFactory" />
+    </bean>
+
+    <bean id="jpaEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+        <property name="dataSource" ref="activitiDataSource" />
+        <property name="packagesToScan" value="dz.cirtaflow.models.*" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="jpaProperties" >
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQL57InnoDBDialect
+                hibernate.hbm2ddl.auto=update
+                hibernate.ejb.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy
+                hibernate.show_sql=false
+                hibernate.format_sql=true
+                spring.jpa.hibernate.ddl-auto=update
+            </value>
+        </property>
+    </bean>
+
+    <jpa:repositories base-package="dz.cirtaflow.repositories.*"
+                      transaction-manager-ref="jpaTransactionManager"
+                      entity-manager-factory-ref="jpaEntityManagerFactory"
+                      consider-nested-repositories="false"
+                      />
+
+    <bean id="repositoryRestMvcConfig"
+          class="org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration" />
+
+
+
+
+</beans>

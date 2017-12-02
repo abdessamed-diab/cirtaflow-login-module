@@ -1,0 +1,184 @@
+#top {
+    position: fixed;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+}
+
+#login-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background-color: hsla(160, 10%, 20%, 1);
+}
+
+#bottom {
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    /*text-align: center;*/
+}
+
+.bottom {
+    position: absolute;
+    bottom: 2px;
+    text-align: center;
+    width: 100%;
+}
+
+#div-login-form {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+    /*margin: auto;*/
+}
+
+.ui-input-text {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid hsla(0, 100%, 100%, 0.25);
+    padding: 10px 16px;
+    font-size: 18px;
+    font-family: "Courier 10 Pitch";
+    background-color: hsla(50, 5%, 20%, 0.5);
+    color: hsla(0, 100%, 100%, 0.75);
+    letter-spacing: 2px;
+    /*margin: 2px 0px;*/
+}
+
+.ui-input-text:required {
+    box-shadow: none;
+}
+.ui-input-text:invalid:focus {
+    border-color: hsla(0, 100%, 100%, 1);
+    box-shadow:0 0 1px 1px  hsla(0, 75%, 50%, 0.75);
+    color: hsla(0, 100%, 100%, 1);
+}
+
+.ui-input-text:invalid:focus:optional {
+    box-shadow:0 0 1px 1px hsla(210, 75%, 50%, 0.75);
+}
+
+
+
+.ui-input-text:focus {
+    border-color: hsla(0, 100%, 100%, 1);
+    box-shadow:0 0 1px 1px hsla(210, 75%, 50%, 0.75);
+    color: hsla(0, 100%, 100%, 1);
+}
+
+.ui-input-text::-moz-selection {
+    background: hsla(160, 50%, 50%, 0.15);
+    color: hsla(200, 100%, 90%, 0.75);
+}
+
+.ui-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-family: "Courier 10 Pitch";
+    color: hsla(0, 100%, 100%, 0.4);
+    background-color: #222;
+    border: none    ;
+    letter-spacing: 2px;
+    /*margin: 8px 0px;*/
+}
+
+.ui-button:focus {
+    background-color: hsla(5, 0%, 25%, 0.5);
+    color: hsla(0, 100%, 100%, 1);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.38);
+}
+
+.ui-button:hover {
+    background-color: hsla(5, 0%, 25%, 0.5);
+    color: hsla(0, 100%, 100%, 1);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.38);
+}
+
+.ui-button-green:visited , .ui-button-green:hover {
+    background-color: hsla(160, 75%, 50%, 0.65);
+}
+.ui-button-blue:visited , .ui-button-blue:hover {
+    background-color: hsla(210, 75%, 50%, 0.75)
+}
+.ui-button-green:focus {
+    background-color: hsla(160, 75%, 50%, 0.65);
+}
+.ui-button-blue:focus {
+    background-color: hsla(210, 75%, 50%, 0.75);
+}
+.ui-button-green {
+    background-color: hsla(160, 50%, 50%, 0.5);
+}
+.ui-button-blue{
+    background-color: hsla(210, 50%, 50%, 0.5);
+}
+
+.h1-heading {
+    color: hsla(180, 70%, 80%, 0.5);
+    font-family: "Courier 10 Pitch";
+    letter-spacing: 2px;
+    text-decoration: line-through;
+}
+
+#hd_logo {
+    margin-top: 64px;
+    -webkit-filter: grayscale(85%);
+    filter: grayscale(85%);
+    -webkit-animation-duration: 120s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: logo_default_animation;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-duration: 120s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: logo_default_animation;
+    -moz-animation-timing-function: linear;
+    animation-duration: 120s;
+    animation-iteration-count: infinite;
+    animation-name: logo_default_animation;
+    animation-timing-function: linear;
+}
+
+.popup {
+    z-index: 1;
+    background-color: hsla(160, 50%, 5%, 0.5);
+    box-shadow: 0 0 4px 4px #222;
+    color: hsla(0, 100%, 100%, 0.75);
+    border-radius: 8px;
+    margin: auto;
+
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.popup:hover {
+    background-color: #222;
+    box-shadow: 0 0 4px 4px #111;
+    color: hsla(0, 100%, 100%, 0.95);
+}
+
+.popup-text {
+    font-size: smaller;
+    text-align: center;
+    cursor: pointer;
+}
+
+@-webkit-keyframes logo_default_animation {
+    0% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+@keyframes logo_default_animation {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+@-moz-keyframes logo_default_animation {
+    0% {-moz-transform: rotate(0deg);}
+    100% {-moz-transform: rotate(360deg);}
+}

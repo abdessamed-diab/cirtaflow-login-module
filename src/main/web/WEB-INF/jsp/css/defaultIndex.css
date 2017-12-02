@@ -1,0 +1,116 @@
+.ui-toolbar-container {
+    width: 100%;
+    height: 32px;
+    margin-top: 32px;
+    background-color: hsla(0, 0%, 20%, 1);
+    border-bottom: 2px inset hsla(0, 0%, 5%, 1);
+    box-shadow: 1px 1px 1px 1px hsla(0, 0%, 5%, 0.5);
+}
+#main-border {
+    border-width: 8px;
+    border-style: solid;
+    border-color: hsla(0, 0%, 20%, 1);
+    margin-top: 4px;
+    /*padding: 4px 0;*/
+}
+
+.ui-square {
+    width: 180px;
+    height: 280px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.38);
+    border-radius: 0px;
+    -webkit-transition: width 0.33s, height 0.33s, box-shadow 0.66s, border-radius 0.66s, background-color 0.33s ease  , -webkit-transform 0.33s;
+}
+
+.ui-square:hover, .ui-square:focus {
+    width: 210px;
+    height: 340px;
+    margin: auto;
+    /*background-color: rgba(255, 255, 255, 0.75);*/
+    background-color: hsla(0, 0%, 80%, 1);
+    /*box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.44);*/
+    box-shadow: 0 0 16px 8px hsla(0, 0%, 5%, 0.8);
+    border-radius: 16px;
+}
+
+.ui-square:hover > #centered-container {
+    display: block;
+}
+
+.ui-square:hover > #bottom-container {
+    display: block;
+}
+
+#table-container {
+    width: 98%;
+    height: 100%;
+    border-collapse: collapse;
+    /*border-spacing: 2.8vw;*/
+    /*border: 1px solid #000;*/
+    margin: auto;
+    table-layout: fixed;
+    background-color: hsla(0, 0%, 20%, 1);
+}
+
+td, th, tr {
+    /*border: 4px solid #0F0;*/
+    overflow: visible;
+    white-space: nowrap;
+    width: 200px;
+    min-width: 210px;
+    max-width: 250px;
+    min-height: 300px;
+    max-height: 340px;
+    height: 340px;
+}
+
+.ui-button {
+    width: 98px;
+    padding: 8px 0;
+    background-color: hsla(120, 50%, 50%, 1);
+    -webkit-box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.75);
+    border: 1px solid hsla(120, 75%, 70%, 1);
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    margin: 24px auto;
+    display: block;
+}
+
+#centered-container {
+    position: relative;
+    /*background-color: rgba(255, 10, 10, 0.25);*/
+    width: 75%;
+    height: 40%;
+    top: 25%;
+    left: 0;
+    margin: auto;
+    display: none;
+    overflow-y: hidden;
+}
+
+#bottom-container {
+    display: block;
+    background-color: rgba(255, 10, 10, 0.25);
+    width: 100%;
+    height: 10%;
+    position: relative;
+    top: 50%;
+    left: 0;
+    display: none;
+}
+
+#bottom-link {
+    background-color: hsla(120, 50%, 50%, 1);
+    -webkit-box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.75);
+    border: 1px solid hsla(120, 75%, 70%, 1);
+    display: block;
+    line-height: 32px;
+    text-align: center;
+    color: white;
+    cursor: hand;
+    text-decoration-line: none;
+}
+

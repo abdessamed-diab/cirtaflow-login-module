@@ -1,0 +1,108 @@
+#top {
+    text-align: center;
+}
+
+#bottom {
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    text-align: center;
+}
+
+#div-login-form {
+    text-align: center;
+    margin: auto;
+}
+
+.ui-input-text {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid hsla(0, 100%, 100%, 0.5);
+    padding: 14px 16px;
+    font-size: 18px;
+    font-family: "Courier 10 Pitch";
+    background-color: hsla(50, 5%, 20%, 0.5);
+    color: hsla(0, 100%, 100%, 0.75);
+    letter-spacing: 2px;
+    margin: 8px 0px;
+}
+
+
+.ui-input-text:focus {
+    border-color: hsla(0, 100%, 100%, 1);
+    color: hsla(0, 100%, 100%, 1);
+}
+
+.ui-input-text::-moz-selection {
+    background: hsla(160, 50%, 50%, 0.15);
+    color: hsla(200, 100%, 90%, 0.75);
+}
+
+.ui-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 16px;
+    font-size: 18px;
+    font-family: "Courier 10 Pitch";
+    color: hsla(0, 100%, 100%, 0.75);
+    border: none    ;
+    letter-spacing: 2px;
+    margin: 8px 0px;
+}
+
+.ui-button-green:visited {
+    background-color: hsla(160, 75%, 50%, 0.65);
+}
+.ui-button-blue:visited {
+    background-color: hsla(210, 75%, 50%, 0.75)
+}
+.ui-button-green:focus {
+    background-color: hsla(160, 75%, 50%, 0.65);
+}
+.ui-button-blue:focus {
+    background-color: hsla(210, 75%, 50%, 0.75);
+}
+.ui-button-green {
+    background-color: hsla(160, 50%, 50%, 0.5);
+}
+.ui-button-blue{
+    background-color: hsla(210, 50%, 50%, 0.5);
+}
+
+.h1-heading {
+    color: hsla(180, 70%, 80%, 0.5);
+    font-family: "Courier 10 Pitch";
+    letter-spacing: 2px;
+    text-decoration: line-through;
+}
+
+#hd_logo {
+    margin-top: 5%;
+    -webkit-filter: grayscale(85%);
+    filter: grayscale(85%);
+    -webkit-animation-duration: 120s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: logo_default_animation;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-duration: 120s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: logo_default_animation;
+    -moz-animation-timing-function: linear;
+    animation-duration: 120s;
+    animation-iteration-count: infinite;
+    animation-name: logo_default_animation;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes logo_default_animation {
+    0% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+@keyframes logo_default_animation {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+@-moz-keyframes logo_default_animation {
+    0% {-moz-transform: rotate(0deg);}
+    100% {-moz-transform: rotate(360deg);}
+}
