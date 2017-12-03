@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-public class UI<T extends Node> implements Serializable {
+public class UI<T extends Input> implements Serializable {
     private static final Logger LOG= LogManager.getLogger(UI.class);
     public T node;
 
@@ -25,9 +25,6 @@ public class UI<T extends Node> implements Serializable {
 
             if(InputEmail.class.getSimpleName().equalsIgnoreCase(clazzName))
                 this.node= (T) InputEmail.class.newInstance();
-
-            if(ButtonElement.class.getSimpleName().equalsIgnoreCase(clazzName))
-                this.node= (T) ButtonElement.class.newInstance();
 
 
             initRequiredFields();

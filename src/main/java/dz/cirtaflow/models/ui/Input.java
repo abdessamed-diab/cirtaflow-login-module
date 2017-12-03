@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name = "CF_NODE")
+@Table(name = "CF_INPUT")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Node implements HtmlElement, FormElement {
-    private static final Logger LOG= LogManager.getLogger(Node.class);
+public class Input implements HtmlElement, FormElement {
+    private static final Logger LOG= LogManager.getLogger(Input.class);
 
     protected Long pk;
 
@@ -33,14 +33,14 @@ public class Node implements HtmlElement, FormElement {
 
     private View viewId;
 
-    protected Node() {
+    protected Input() {
         LOG.debug("default constructor.");
         this.formElement= new FormElementImpl();
         this.element= new ElementImpl();
         this.htmlElement= new HtmlElementImpl();
     }
 
-    public Node(@NonNull  FormElement formElement, @NonNull HtmlElement htmlElement, @NonNull Element element) {
+    public Input(@NonNull  FormElement formElement, @NonNull HtmlElement htmlElement, @NonNull Element element) {
         LOG.debug("init constructor.");
         this.formElement=   formElement;
         this.htmlElement=   htmlElement;
@@ -51,7 +51,7 @@ public class Node implements HtmlElement, FormElement {
 
     @Override
     public String toString() {
-        return "Node:"+this.getPk();
+        return "Input:"+this.getPk();
     }
 
     @Override
@@ -126,9 +126,9 @@ public class Node implements HtmlElement, FormElement {
     }
 
     @Override
-    @Column(name = "FORM_NON_VALIDATE", unique = false, updatable = true, nullable = true,  insertable = true)
-    public Boolean isFormNoValidate() {
-        return this.formElement.isFormNoValidate();
+    @Column(name = "FORM_NO_VALIDATE", unique = false, updatable = true, nullable = true,  insertable = true)
+    public Boolean getFormNoValidate() {
+        return this.formElement.getFormNoValidate();
     }
 
     @Override
@@ -507,7 +507,7 @@ public class Node implements HtmlElement, FormElement {
         this.element.setTagName(tagName);
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
     @JoinColumn(name = "VIEW_ID", insertable = true, updatable = true, unique = false, nullable = true, referencedColumnName = "ID")
     public View getViewId() {
         return viewId;

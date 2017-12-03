@@ -3,6 +3,8 @@ package dz.cirtaflow.models.ui;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.w3c.dom.html.HTMLFormElement;
@@ -20,7 +22,7 @@ public class View implements Serializable, FormElement {
 
     private String name;
 
-    private List<Node> nodes;
+    private List<Input> inputs;
     private List<ButtonElement> buttons;
 
     private FormElement formElement= null;
@@ -80,16 +82,18 @@ public class View implements Serializable, FormElement {
         this.name = name;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy = "viewId")
-    public List<Node> getNodes() {
-        return nodes;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST}, mappedBy = "viewId")
+    @Fetch(value = FetchMode.SUBSELECT)
+    public List<Input> getInputs() {
+        return inputs;
     }
 
-    public void setNodes(List<Node> nodes) {
-        this.nodes = nodes;
+    public void setInputs(List<Input> inputs) {
+        this.inputs = inputs;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "viewId", targetEntity = Node.class)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "viewId")
+    @Fetch(value = FetchMode.SUBSELECT)
     public List<ButtonElement> getButtons() {
         return buttons;
     }
@@ -153,10 +157,10 @@ public class View implements Serializable, FormElement {
         this.formElement.setFormMethod(formMethod);
     }
 
-    @Column(name = "IS_FORM_NO_VALIDATE", insertable = true, updatable = true, unique = false, nullable = true)
+    @Column(name = "FORM_NO_VALIDATE", insertable = true, updatable = true, unique = false, nullable = true)
     @Override
-    public Boolean isFormNoValidate() {
-        return this.formElement.isFormNoValidate();
+    public Boolean getFormNoValidate() {
+        return this.formElement.getFormNoValidate();
     }
 
     @Override

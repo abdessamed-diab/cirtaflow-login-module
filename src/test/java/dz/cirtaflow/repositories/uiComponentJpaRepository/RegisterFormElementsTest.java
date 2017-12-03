@@ -33,13 +33,13 @@ public class RegisterFormElementsTest implements Serializable {
     private static UI<InputText> emailAddress;
     private static UI<InputPassword> password;
     private static UI<InputEmail> email;
-    private static UI<ButtonElement> button;
+    private static ButtonElement button;
 
     @Autowired(required = true)
     private ViewRepository viewRepository;
 
     @Autowired(required = true)
-    private NodeRepository nodeRepository;
+    private InputRepository nodeRepository;
 
     @Autowired(required = true)
     private InputTextRepository inputTextRepository;
@@ -92,7 +92,7 @@ public class RegisterFormElementsTest implements Serializable {
         this.inputTextRepository.save(lastName.getNode());
         this.inputPasswordRepository.save(password.getNode());
         this.inputEmailRepository.save(email.getNode());
-        this.buttonButtonRepository.save(button.getNode());
+        this.buttonButtonRepository.save(button);
 
         assertNotNull(this.firstName.getNode().getPk(), "save input text did not pass.");
     }
@@ -195,15 +195,14 @@ public class RegisterFormElementsTest implements Serializable {
         return email;
     }
 
-    public static UI<ButtonElement> initButton() {
-        button= new UI<>(ButtonElement.class.getSimpleName());
-        button.getNode().setContent("register");
-        button.getNode().setType(ButtonElement.SUBMIT);
+    public static ButtonElement initButton() {
+        button= new ButtonElement();
+        button.setContent("register");
+        button.setType(ButtonElement.SUBMIT);
 
-        button.getNode().setClassName("ui-button");
-        button.getNode().setTitle("submit you data.");
-        button.getNode().setId(ButtonElement.class.getSimpleName()+"_"+registerForm.getId());
-        button.getNode().setViewId(registerForm);
+        button.setClassName("ui-button");
+//        button.setTitle("submit you data.");
+        button.setViewId(registerForm);
         return button;
     }
 }

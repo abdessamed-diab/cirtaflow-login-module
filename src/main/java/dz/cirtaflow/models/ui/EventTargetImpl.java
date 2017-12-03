@@ -14,7 +14,7 @@ public class EventTargetImpl implements EventTarget, Serializable {
 
     private String eventType;
     private EventListener eventListener;
-    private Node node;
+    private Input node;
 
     private EventTargetImpl(){
 
@@ -29,7 +29,7 @@ public class EventTargetImpl implements EventTarget, Serializable {
         this.eventListener= eventListener;
     }
 
-    public EventTargetImpl(String eventType, EventListener eventListener, Node node) {
+    public EventTargetImpl(String eventType, EventListener eventListener, Input node) {
         this(eventType, eventListener);
         this.node= node;
         node.getEvents().put(eventType, eventListener);

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name = "PK")
 @Table(name = "CF_INPUT_TEXT", catalog = "activiti_cirtaflow_test")
-public class InputText extends Node {
+public class InputText extends Input {
     private static final Logger LOG= LogManager.getLogger(InputText.class);
 
     protected   String  type = "text"       ;

@@ -2,7 +2,7 @@ package dz.cirtaflow.repositories.uiComponentJpaRepository;
 
 import dz.cirtaflow.models.ui.FormElement;
 import dz.cirtaflow.models.ui.FormElementImpl;
-import dz.cirtaflow.models.ui.Node;
+import dz.cirtaflow.models.ui.Input;
 import dz.cirtaflow.models.ui.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -74,7 +74,7 @@ public class ViewRepositoryTest extends UiComponentBaseIntegrationTest {
     public void testFindNodesByViewId() {
         View firstView= this.viewRepository.findAll().iterator().next();
 
-        Iterable<Node> nodes= this.nodeRepository.findNodesByViewId(firstView);
+        Iterable<Input> nodes= this.nodeRepository.findNodesByViewId(firstView);
         assumeTrue(nodes.iterator().hasNext(), "assumption field.");
         assertNotNull(nodes.iterator().next() , "result mismatch, result is null.");
     }
@@ -89,8 +89,8 @@ public class ViewRepositoryTest extends UiComponentBaseIntegrationTest {
 
     @Test
     public void testGetNodesOnDefaultEagerLoading() {
-        assumeTrue(this.view.getNodes() != null, "assumption field.");
-        assertTrue(!this.view.getNodes().isEmpty(), "assumption field.");
+        assumeTrue(this.view.getInputs() != null, "assumption field.");
+        assertTrue(!this.view.getInputs().isEmpty(), "assumption field.");
     }
 
 

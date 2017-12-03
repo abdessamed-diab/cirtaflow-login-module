@@ -10,8 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name= "CF_BUTTON_ELEMENT")
-@PrimaryKeyJoinColumn(name = "PK")
-public class ButtonElement extends Node {
+public class ButtonElement {
     private static final Logger LOG= LogManager.getLogger(ButtonElement.class);
 
     public static final String SUBMIT="submit";
@@ -19,6 +18,7 @@ public class ButtonElement extends Node {
     public static final String BUTTON="button";
     public static final String MENU= "menu";
 
+    private Long id;
 
     private String type;
     private HTMLMenuElement menu;
@@ -26,25 +26,39 @@ public class ButtonElement extends Node {
     private String  value;
     private Boolean willValidate;
     private String  content;
+    private String className;
+
+    private View viewId;
 
     public ButtonElement() {
         super();
         this.type= BUTTON;
     }
 
-    public ButtonElement(@Nullable String id) {
+    public ButtonElement(@Nullable Long id) {
         this();
-        this.setId(id);
+        this.id= id;
     }
 
-    public ButtonElement(@Nullable String id, @NonNull String content) {
+    public ButtonElement(@Nullable Long id, @NonNull String content) {
         this(id);
         this.content= content;
     }
 
-    public ButtonElement(@Nullable String id, @NonNull String content, @NonNull String type) {
+    public ButtonElement(@Nullable Long id, @NonNull String content, @NonNull String type) {
         this(id, content);
         this.type= type;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", nullable = false, unique = true, updatable = true, insertable = true)
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Column(name = "TYPE", nullable = false, unique = false, updatable = true, insertable = true)
@@ -101,5 +115,21 @@ public class ButtonElement extends Node {
         this.content = content;
     }
 
+    public String getClassName() {
+        return className;
+    }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    @JoinColumn(name = "VIEW_id", insertable = true, updatable = true, unique = false, nullable = true, referencedColumnName = "ID")
+    public View getViewId() {
+        return this.viewId;
+    }
+
+    public void setViewId(View viewId) {
+        this.viewId= viewId;
+    }
 }

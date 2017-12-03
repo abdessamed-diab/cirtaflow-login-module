@@ -21,19 +21,19 @@ public class NodeFactory implements Serializable {
     private static final Logger LOG = LogManager.getLogger(NodeFactory.class);
     protected static final String VIEW_NAME= "register_form";
 
-    protected Node node;
+    protected Input node;
     protected View view;
 
-    protected List<Node> nodes= new ArrayList<>();
+    protected List<Input> nodes= new ArrayList<>();
 
     public NodeFactory() {
         LOG.debug("default constructor.");
     }
 
     protected <T> NodeFactory(@NonNull  Class<T> clazz) {
-        if( clazz.isAssignableFrom(Node.class) ) {
-            LOG.debug("clazz: "+clazz.getSimpleName()+" is assignable from Node class");
-            this.node= new Node(
+        if( clazz.isAssignableFrom(Input.class) ) {
+            LOG.debug("clazz: "+clazz.getSimpleName()+" is assignable from Input class");
+            this.node= new Input(
                     new FormElementImpl(),
                     new HtmlElementImpl(),
                     new ElementImpl()
@@ -57,7 +57,7 @@ public class NodeFactory implements Serializable {
      * initialize non nullable declared columns with default values according to there types.
      */
     protected void initNode() {
-        Arrays.asList(ReflectionUtils.getAllDeclaredMethods(Node.class))
+        Arrays.asList(ReflectionUtils.getAllDeclaredMethods(Input.class))
                 .stream()
                 .filter(  method-> {
                     if(method.isAnnotationPresent(Column.class) && !method.isAnnotationPresent(Id.class)
@@ -79,13 +79,13 @@ public class NodeFactory implements Serializable {
                     if(method.getName().toLowerCase().startsWith("get") || method.getName().toLowerCase().startsWith("is")){
                         try {
                             if(method.getReturnType().isAssignableFrom(Boolean.class))
-                                Node.class.getDeclaredMethod(
+                                Input.class.getDeclaredMethod(
                                         method.getName().replaceFirst("is", "set")
                                         , method.getReturnType()
                                 ).invoke(node, Boolean.FALSE);
 
                             if(method.getReturnType().isAssignableFrom(String.class))
-                                Node.class.getDeclaredMethod(
+                                Input.class.getDeclaredMethod(
                                         method.getName()
                                                 .replace("get", "set")
                                         , method.getReturnType()

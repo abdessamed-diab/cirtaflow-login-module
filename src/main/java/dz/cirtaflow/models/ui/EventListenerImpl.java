@@ -11,13 +11,13 @@ public class EventListenerImpl implements Serializable, EventListener {
     private static final Logger LOG= LogManager.getLogger(EventListenerImpl.class);
 
     private Event event;
-    private Node node;
+    private Input node;
 
     protected EventListenerImpl() {
         LOG.debug("default constructor");
     }
 
-    public EventListenerImpl(Node node) {
+    public EventListenerImpl(Input node) {
         LOG.debug("init constructor.");
     }
 

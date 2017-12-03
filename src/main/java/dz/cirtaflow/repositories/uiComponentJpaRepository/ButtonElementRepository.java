@@ -4,7 +4,7 @@ import dz.cirtaflow.models.ui.ButtonElement;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "buttonElement", path = "buttonElement")
+@RepositoryRestResource(collectionResourceRel = "buttonElement", path = "buttonElement", exported = false)
 public interface ButtonElementRepository extends CrudRepository<ButtonElement, Long>{
 
 }

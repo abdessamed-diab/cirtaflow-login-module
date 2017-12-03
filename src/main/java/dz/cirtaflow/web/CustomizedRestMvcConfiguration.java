@@ -1,6 +1,6 @@
 package dz.cirtaflow.web;
 
-import dz.cirtaflow.repositories.uiComponentJpaRepository.projections.NodeProjection;
+import dz.cirtaflow.repositories.uiComponentJpaRepository.projections.InputProjection;
 import dz.cirtaflow.validators.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,7 +39,7 @@ public class CustomizedRestMvcConfiguration extends RepositoryRestConfigurerAdap
 
 
 //        attache projections
-        config.getProjectionConfiguration().addProjection(NodeProjection.class);
+        config.getProjectionConfiguration().addProjection(InputProjection.class);
     }
 
     /**

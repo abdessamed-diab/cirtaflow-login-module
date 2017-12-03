@@ -70,7 +70,7 @@ public class FormElementImpl extends ElementImpl implements FormElement{
     }
 
     @Override
-    public Boolean isFormNoValidate() {
+    public Boolean getFormNoValidate() {
         return formNoValidate;
     }
 

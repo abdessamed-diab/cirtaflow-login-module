@@ -24,7 +24,7 @@ public interface FormElement extends Serializable {
     String          getFormMethod   ()                      ;
     void            setFormMethod   (String formMethod)     ;
 
-    Boolean         isFormNoValidate()                      ;
+    Boolean         getFormNoValidate()                      ;
     void            setFormNoValidate(Boolean formNoValidate);
 
     String          getFormTarget()                         ;

@@ -1,6 +1,6 @@
 package dz.cirtaflow.repositories.uiComponentJpaRepository;
 
-import dz.cirtaflow.models.ui.Node;
+import dz.cirtaflow.models.ui.Input;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class UiComponentBaseIntegrationTest extends NodeFactory implements Seria
      * defining all needed dependencies for ui component.
      */
     @Autowired(required = true)
-    protected NodeRepository nodeRepository;
+    protected InputRepository nodeRepository;
 
     @Autowired(required = true)
     protected ViewRepository viewRepository;
@@ -40,7 +40,7 @@ public class UiComponentBaseIntegrationTest extends NodeFactory implements Seria
      * node domain model represent the very basic input ui needed for building web pages.
      */
     protected UiComponentBaseIntegrationTest() {
-        super(Node.class);
+        super(Input.class);
         LOG.traceEntry("default constructor.");
     }
 }

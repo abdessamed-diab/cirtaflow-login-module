@@ -32,9 +32,9 @@ public class ButtonElementRepositoryTest extends UiComponentBaseIntegrationTest{
         view= new View(VIEW_NAME, formElement);
         view= this.viewRepository.save(view);
         this.button.setViewId(view);
-        this.button.setDisabled(false);
-        this.button.setRequired(false);
-        this.button.setId(ButtonElement.class.getSimpleName()+"_"+view.getId());
+//        this.button.setDisabled(false);
+//        this.button.setRequired(false);
+//        this.button.setId(ButtonElement.class.getSimpleName()+"_"+view.getId());
         this.button= this.buttonElementRepository.save(button);
     }
 
@@ -46,7 +46,7 @@ public class ButtonElementRepositoryTest extends UiComponentBaseIntegrationTest{
 
     @Test
     public void testFindById() {
-        assertEquals(button.getContent(), this.buttonElementRepository.findById(this.button.getPk()).get().getContent() ) ;
+        assertEquals(button.getContent(), this.buttonElementRepository.findById(this.button.getId()).get().getContent() ) ;
     }
 
 

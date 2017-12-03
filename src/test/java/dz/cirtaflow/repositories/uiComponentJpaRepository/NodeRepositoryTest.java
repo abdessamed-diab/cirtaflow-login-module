@@ -1,6 +1,6 @@
 package dz.cirtaflow.repositories.uiComponentJpaRepository;
 
-import dz.cirtaflow.models.ui.Node;
+import dz.cirtaflow.models.ui.Input;
 import dz.cirtaflow.models.ui.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,7 +62,7 @@ public class NodeRepositoryTest extends UiComponentBaseIntegrationTest {
     public void testSaveAll() {
         LOG.debug("save all inputs.");
 
-        Iterable<? extends Node> list= this.nodeRepository.saveAll(nodes);
+        Iterable<? extends Input> list= this.nodeRepository.saveAll(nodes);
         list.forEach((node) -> {
             LOG.info("node: "+node.toString());
             assertNotNull(node.getPk(), "service did not save all rows.");
@@ -77,7 +77,7 @@ public class NodeRepositoryTest extends UiComponentBaseIntegrationTest {
     @Test
     public void testFindById() {
         LOG.debug("find by id.");
-        Optional<Node> optionalNode= this.nodeRepository.findById(this.node.getPk());
+        Optional<Input> optionalNode= this.nodeRepository.findById(this.node.getPk());
         assumeTrue(optionalNode.isPresent(), "assumption field.");
         assertEquals(this.node.getPk(), optionalNode.get().getPk(), "find by id did not pass.");
         LOG.info("find by id: "+this.node.getPk()+" equal to "+optionalNode.get().getPk());
@@ -98,16 +98,16 @@ public class NodeRepositoryTest extends UiComponentBaseIntegrationTest {
     @Test
     public void testFindAll() {
         LOG.debug("find all");
-        Iterable<Node> nodes= this.nodeRepository.findAll();
+        Iterable<Input> nodes= this.nodeRepository.findAll();
         assertTrue(nodes.iterator().hasNext(), "find all did not pass.");
     }
 
     @Test
     public void testFindAllById() {
         LOG.debug("find all by id");
-        Iterable<Node> nodes= this.nodeRepository.findAll();
+        Iterable<Input> nodes= this.nodeRepository.findAll();
         List<Long> ids= new ArrayList<>();
-        nodes.forEach((Node node) -> {
+        nodes.forEach((Input node) -> {
             ids.add(node.getPk());
         });
         assertTrue( this.nodeRepository.findAllById(ids).iterator().hasNext(), "find all by id did not pass." );
@@ -134,7 +134,7 @@ public class NodeRepositoryTest extends UiComponentBaseIntegrationTest {
     public void testFindByViewId() {
         Optional<View> latestView= this.viewRepository.findByName(VIEW_NAME);
         assumeTrue(latestView.isPresent(), "view table is empty. assumption field");
-        Iterable<Node> nodes= this.nodeRepository.findByViewId(latestView.get());
+        Iterable<Input> nodes= this.nodeRepository.findByViewId(latestView.get());
         assertNotNull(nodes, "find by view id did not pass.");
     }
 
