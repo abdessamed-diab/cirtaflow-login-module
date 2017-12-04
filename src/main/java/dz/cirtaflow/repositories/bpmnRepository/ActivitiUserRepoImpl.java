@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Repository(value = "activitiUserRepoImpl")
 public class ActivitiUserRepoImpl implements ActivitiUserRepo, DefaultSingletonBeanStructure{
@@ -139,5 +140,15 @@ public class ActivitiUserRepoImpl implements ActivitiUserRepo, DefaultSingletonB
     @Override
     public boolean existsByEmail(@NonNull String email) {
         return this.identityService.createUserQuery().userEmail(email).singleResult() != null;
+    }
+
+    @Override
+    public Optional<User> findUserById(String userId) {
+        return Optional.ofNullable(this.identityService.createUserQuery().userId(userId).singleResult());
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(this.identityService.createUserQuery().userEmail(email).singleResult());
     }
 }

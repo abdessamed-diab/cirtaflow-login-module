@@ -18,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,11 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LoginController implements Serializable, Closeable, InitializingBean, WebMvcConfigurer{
@@ -212,42 +208,36 @@ public class LoginController implements Serializable, Closeable, InitializingBea
 
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     @GetMapping("/facebookredirect")
-    public ModelAndView gotoIndexFromFacebook(@RequestParam(name = "code", defaultValue = "", required = false) String code,
-                                              Model model) {
-        if(!StringUtils.isBlank(code)){
-//            code returned from facebook login page.
-            LOG.info("returned code from facebook is: "+code);
-            Map<String, String> modelMap= new HashMap<>();
+    public String gotoIndexFromFacebook(@RequestParam(name = "code", defaultValue = "", required = false) String code) {
 
-            try {
-                String email= facebookService.getUserEmail(code);
-                modelMap.put("email", email    );
-                if(!modelMap.isEmpty()) {
-                    InMemoryUserDetailsManager manager= new InMemoryUserDetailsManager();
-                    manager.createUser(User.withUsername(email ).password("12345678").roles("ADMIN").build() );
+        LOG.info("returned code from facebook is: "+code);
+        if(StringUtils.isBlank(code))
+            return "login";
 
-                    SecurityContextHolder.getContext().setAuthentication(
-                            new UsernamePasswordAuthenticationToken(manager.loadUserByUsername(email),
-                                    new GrantedAuthority() {
-                                        @Override
-                                        public String getAuthority() {
-                                            return "ROLE_ADMIN";
-                                        }
-                                    })
-                    );
-                    model.addAttribute("email", email);
-                    ModelAndView mv= new ModelAndView("index", modelMap);
-                    mv.addObject("email", email);
-                    return mv;
-                }else
-                    throw new UserPrincipalNotFoundException("email can't extracted");
-            } catch (UserPrincipalNotFoundException ex) {
-                LOG.error(ex);
-            }
+        org.springframework.social.facebook.api.User facebookUserProfile= facebookService.getUserProfile(code);
+        String email= facebookUserProfile.getEmail();
+        String first = facebookUserProfile.getFirstName();
+        String last = facebookUserProfile.getLastName();
 
-        }
+        InMemoryUserDetailsManager manager= new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername(email ).password(first+"."+last).roles("USER").build() );
 
-        return new ModelAndView("login");
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(manager.loadUserByUsername(email),
+                        new GrantedAuthority() {
+                            @Override
+                            public String getAuthority() {
+                                return "ROLE_ADMIN";
+                            }
+                        })
+        );
+
+        identity.createAndSaveNewUser(first,last, email);
+        if(!this.authorityRepository.existsByEmail(email))
+            this.authorityRepository.save(new CfActIdUserAuthority("ROLE_USER", email));
+
+        return "index";
+
     }
 
 }

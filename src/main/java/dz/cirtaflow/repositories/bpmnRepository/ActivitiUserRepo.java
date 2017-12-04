@@ -10,6 +10,7 @@ import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public interface ActivitiUserRepo extends Serializable{
     Logger LOG= LogManager.getLogger(ActivitiUserRepo.class);
@@ -70,6 +71,10 @@ public interface ActivitiUserRepo extends Serializable{
     Iterable<User>      findAll();
 
     boolean             existsByEmail(@NonNull String email);
+
+    Optional<User> findUserById(String userId);
+
+    Optional<User>      findByEmail(String email);
 
 //    drop table ACT_GE_PROPERTY cascade constraints;
 //    drop table ACT_RU_VARIABLE cascade constraints;

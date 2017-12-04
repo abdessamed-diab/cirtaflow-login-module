@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,23 @@ public class ActivitiIdentityImpl implements DefaultSingletonBeanStructure, Acti
     @Override
     public <S extends User> S createNewUser(String userId) throws ActivitiUserRepo.IdentityException {
         return (S) userRepo.createNewUser(userId);
+    }
+
+    @Override
+    public <S extends User> S createAndSaveNewUser(@NonNull String firstName,@NonNull String lastName,@NonNull String email) {
+        User user= this.userRepo.createNewUser(firstName+"."+lastName);
+        if(userRepo.userExists(user.getId()) )
+            return (S) userRepo.findUserById(user.getId()).get();
+        if(userRepo.existsByEmail(email) )
+            return (S) userRepo.findByEmail(email).get();
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(user.getFirstName()+"."+user.getLastName());
+        user = this.userRepo.saveUser(user);
+        userRepo.addUserInfo(user.getFirstName()+"."+user.getLastName(), "authority", "ROLE_USER");
+        return (S) user;
     }
 
     @Override
@@ -75,11 +93,6 @@ public class ActivitiIdentityImpl implements DefaultSingletonBeanStructure, Acti
     }
 
     @Override
-    public User findOne(String s) {
-        return null;
-    }
-
-    @Override
     public boolean exists(String s) {
         return false;
     }
@@ -99,23 +112,4 @@ public class ActivitiIdentityImpl implements DefaultSingletonBeanStructure, Acti
         return 0;
     }
 
-    @Override
-    public void delete(String s) {
-
-    }
-
-    @Override
-    public void delete(User user) {
-
-    }
-
-    @Override
-    public void delete(Iterable<? extends User> iterable) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
 }

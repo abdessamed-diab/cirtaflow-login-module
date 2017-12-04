@@ -5,8 +5,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FriendOperations;
+import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.UserOperations;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
@@ -158,6 +160,18 @@ public class SocialFacebookImpl implements SocialFacebook, InitializingBean {
         return null;
     }
 
+    @Override
+    public String getUserFirstName(@NonNull String code) {
+        return this.userOperations(code).getUserProfile().getFirstName();
+    }
 
+    @Override
+    public String getUserLastName(@NonNull String code) {
+        return this.userOperations(code).getUserProfile().getLastName();
+    }
 
+    @Override
+    public User getUserProfile(String code) {
+        return this.userOperations(code).getUserProfile();
+    }
 }

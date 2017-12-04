@@ -2,8 +2,11 @@ package dz.cirtaflow.services.facebookServices;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FriendOperations;
+import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.UserOperations;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -61,5 +64,7 @@ public interface SocialFacebook extends Serializable{
     FriendOperations friendOperations(String code) throws IllegalArgumentException;
     UserOperations userOperations(String code) throws IllegalArgumentException;
     String getUserEmail(String code) throws UserPrincipalNotFoundException;
-
+    String getUserFirstName(@NonNull String code) ;
+    String getUserLastName(@NonNull String code);
+    User getUserProfile(String code);
 }
