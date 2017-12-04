@@ -5,31 +5,26 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_ATTACHMENT")
-@XmlRootElement
+@Table(name = "ACT_HI_ATTACHMENT", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiAttachment.findAll", query = "SELECT a FROM ActHiAttachment a")
-    , @NamedQuery(name = "ActHiAttachment.findById", query = "SELECT a FROM ActHiAttachment a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiAttachment.findByRev", query = "SELECT a FROM ActHiAttachment a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActHiAttachment.findByUserId", query = "SELECT a FROM ActHiAttachment a WHERE a.userId = :userId")
-    , @NamedQuery(name = "ActHiAttachment.findByName", query = "SELECT a FROM ActHiAttachment a WHERE a.name = :name")
-    , @NamedQuery(name = "ActHiAttachment.findByDescription", query = "SELECT a FROM ActHiAttachment a WHERE a.description = :description")
-    , @NamedQuery(name = "ActHiAttachment.findByType", query = "SELECT a FROM ActHiAttachment a WHERE a.type = :type")
-    , @NamedQuery(name = "ActHiAttachment.findByTaskId", query = "SELECT a FROM ActHiAttachment a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiAttachment.findByProcInstId", query = "SELECT a FROM ActHiAttachment a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiAttachment.findByUrl", query = "SELECT a FROM ActHiAttachment a WHERE a.url = :url")
-    , @NamedQuery(name = "ActHiAttachment.findByContentId", query = "SELECT a FROM ActHiAttachment a WHERE a.contentId = :contentId")
-    , @NamedQuery(name = "ActHiAttachment.findByTime", query = "SELECT a FROM ActHiAttachment a WHERE a.time = :time")})
+    @NamedQuery(name = "ActHiAttachment.findAll", query = "SELECT a FROM ActHiAttachment a")})
 public class ActHiAttachment implements Serializable {
 
     private static final long serialVersionUID = 1L;

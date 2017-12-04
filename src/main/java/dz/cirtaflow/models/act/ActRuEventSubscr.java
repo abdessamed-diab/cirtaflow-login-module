@@ -5,30 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_EVENT_SUBSCR")
-@XmlRootElement
+@Table(name = "ACT_RU_EVENT_SUBSCR", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuEventSubscr.findAll", query = "SELECT a FROM ActRuEventSubscr a")
-    , @NamedQuery(name = "ActRuEventSubscr.findById", query = "SELECT a FROM ActRuEventSubscr a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuEventSubscr.findByRev", query = "SELECT a FROM ActRuEventSubscr a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuEventSubscr.findByEventType", query = "SELECT a FROM ActRuEventSubscr a WHERE a.eventType = :eventType")
-    , @NamedQuery(name = "ActRuEventSubscr.findByEventName", query = "SELECT a FROM ActRuEventSubscr a WHERE a.eventName = :eventName")
-    , @NamedQuery(name = "ActRuEventSubscr.findByProcInstId", query = "SELECT a FROM ActRuEventSubscr a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActRuEventSubscr.findByActivityId", query = "SELECT a FROM ActRuEventSubscr a WHERE a.activityId = :activityId")
-    , @NamedQuery(name = "ActRuEventSubscr.findByConfiguration", query = "SELECT a FROM ActRuEventSubscr a WHERE a.configuration = :configuration")
-    , @NamedQuery(name = "ActRuEventSubscr.findByCreated", query = "SELECT a FROM ActRuEventSubscr a WHERE a.created = :created")
-    , @NamedQuery(name = "ActRuEventSubscr.findByProcDefId", query = "SELECT a FROM ActRuEventSubscr a WHERE a.procDefId = :procDefId")
-    , @NamedQuery(name = "ActRuEventSubscr.findByTenantId", query = "SELECT a FROM ActRuEventSubscr a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActRuEventSubscr.findAll", query = "SELECT a FROM ActRuEventSubscr a")})
 public class ActRuEventSubscr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +56,7 @@ public class ActRuEventSubscr implements Serializable {
     @Column(name = "TENANT_ID_", length = 255)
     private String tenantId;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
 
     public ActRuEventSubscr() {

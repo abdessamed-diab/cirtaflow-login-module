@@ -5,31 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_SUSPENDED_JOB")
-@XmlRootElement
+@Table(name = "ACT_RU_SUSPENDED_JOB", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuSuspendedJob.findAll", query = "SELECT a FROM ActRuSuspendedJob a")
-    , @NamedQuery(name = "ActRuSuspendedJob.findById", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByRev", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByType", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.type = :type")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByExclusive", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.exclusive = :exclusive")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByRetries", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.retries = :retries")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByExceptionMsg", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.exceptionMsg = :exceptionMsg")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByDuedate", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.duedate = :duedate")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByRepeat", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.repeat = :repeat")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByHandlerType", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.handlerType = :handlerType")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByHandlerCfg", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.handlerCfg = :handlerCfg")
-    , @NamedQuery(name = "ActRuSuspendedJob.findByTenantId", query = "SELECT a FROM ActRuSuspendedJob a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActRuSuspendedJob.findAll", query = "SELECT a FROM ActRuSuspendedJob a")})
 public class ActRuSuspendedJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,16 +57,16 @@ public class ActRuSuspendedJob implements Serializable {
     @Column(name = "TENANT_ID_", length = 255)
     private String tenantId;
     @JoinColumn(name = "EXCEPTION_STACK_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray exceptionStackId;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
     @JoinColumn(name = "PROCESS_INSTANCE_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution processInstanceId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
 
     public ActRuSuspendedJob() {

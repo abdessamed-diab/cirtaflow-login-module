@@ -5,28 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_COMMENT")
-@XmlRootElement
+@Table(name = "ACT_HI_COMMENT", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiComment.findAll", query = "SELECT a FROM ActHiComment a")
-    , @NamedQuery(name = "ActHiComment.findById", query = "SELECT a FROM ActHiComment a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiComment.findByType", query = "SELECT a FROM ActHiComment a WHERE a.type = :type")
-    , @NamedQuery(name = "ActHiComment.findByTime", query = "SELECT a FROM ActHiComment a WHERE a.time = :time")
-    , @NamedQuery(name = "ActHiComment.findByUserId", query = "SELECT a FROM ActHiComment a WHERE a.userId = :userId")
-    , @NamedQuery(name = "ActHiComment.findByTaskId", query = "SELECT a FROM ActHiComment a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiComment.findByProcInstId", query = "SELECT a FROM ActHiComment a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiComment.findByAction", query = "SELECT a FROM ActHiComment a WHERE a.action = :action")
-    , @NamedQuery(name = "ActHiComment.findByMessage", query = "SELECT a FROM ActHiComment a WHERE a.message = :message")})
+    @NamedQuery(name = "ActHiComment.findAll", query = "SELECT a FROM ActHiComment a")})
 public class ActHiComment implements Serializable {
 
     private static final long serialVersionUID = 1L;

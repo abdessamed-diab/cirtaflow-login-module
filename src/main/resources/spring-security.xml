@@ -11,29 +11,19 @@
                     default-target-url="/index"
                     login-processing-url="/index"
                     authentication-failure-url="/login?error=1"
+                    username-parameter="EMAIL_"
+                    password-parameter="PWD_"
+                    always-use-default-target="true"
 
         />
 
-        <access-denied-handler error-page="/jsp/accessDenied.jsp" />
-
-        <!--<intercept-url pattern=                      "/"     access="permitAll()"  requires-channel="any"    />-->
-        <!--<intercept-url pattern=                 "/login"     access="permitAll()"  requires-channel="any"    />-->
-        <!--<intercept-url pattern=         "/jsp/login.jsp"     access="permitAll()"  requires-channel="any"    />-->
-        <!--<intercept-url pattern=                 "/index"     access="hasRole('ROLE_ADMIN')" requires-channel="https"  />-->
-        <!--<intercept-url pattern=         "/jsp/index.jsp"     access="hasRole('ROLE_ADMIN')" requires-channel="https"  />-->
-
-        <!--<intercept-url pattern=         "/facebook/**"     access="permitAll()" requires-channel="https"  />-->
-
-        <!--<intercept-url pattern=            "/jsp/css/**"     access="permitAll()"      />-->
-        <!--<intercept-url pattern=            "/jsp/img/**"     access="permitAll()"      />-->
-        <!--<intercept-url pattern=             "/jsp/js/**"     access="permitAll()"      />-->
-        <!--<intercept-url pattern=                "/jsp/**"     access="hasRole('USER')" requires-channel="https"   />-->
+        <access-denied-handler error-page="/template/accessDenied.html" />
 
         <intercept-url pattern=                      "/"     access="permitAll()"  requires-channel="any"    />
         <intercept-url pattern=                 "/login"     access="permitAll()"  requires-channel="any"    />
         <intercept-url pattern=         "/template/login.html"     access="permitAll()"  requires-channel="any"    />
-        <intercept-url pattern=                 "/index"     access="hasRole('ROLE_ADMIN')" requires-channel="any"  />
-        <intercept-url pattern=         "/template/index.html"     access="hasRole('ROLE_ADMIN')" requires-channel="any"  />
+        <intercept-url pattern=                 "/index"     access="hasRole('ROLE_USER')" requires-channel="any"  />
+        <intercept-url pattern=         "/template/index.html"     access="hasRole('ROLE_USER')" requires-channel="any"  />
 
         <intercept-url pattern=         "/facebook/**"     access="permitAll()" requires-channel="any"  />
 
@@ -48,22 +38,29 @@
         <!--for testing rest repos-->
         <csrf disabled="true" />
 
-        <custom-filter ref="customUsernamePasswordAuthFilter"  after="FORM_LOGIN_FILTER" />
         <x509 subject-principal-regex="CN=(.*?)," />
     </http>
 
-    <authentication-manager id="defaultAuthenticationManager">
+    <!--<authentication-manager id="defaultAuthenticationManager">-->
+        <!--<authentication-provider>-->
+            <!--<user-service id="inMemoryUserDetailsService">-->
+                <!--<user name="mechel178" password="063639118" authorities="ROLE_ADMIN" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+    <authentication-manager id="controllerAuthenticationManager">
         <authentication-provider>
-            <user-service id="inMemoryUserDetailsService">
-                <user name="mechel178" password="063639118" authorities="ROLE_ADMIN" />
-            </user-service>
+            <!--the third arg stands for enabled, saying if the given user is enabled.-->
+            <jdbc-user-service id="jdbcUserService" data-source-ref="activitiDataSource"
+                                users-by-username-query="select EMAIL_, pwd_, TRUE from ACT_ID_USER where EMAIL_ =?"
+                               authorities-by-username-query="select EMAIL, AUTHORITY from CF_ACT_ID_USER_AUTHORITY where EMAIL=?"/>
         </authentication-provider>
+        <authentication-provider ref="defaultAuthenticationProvider" />
     </authentication-manager>
 
-    <beans:bean id="basicAuthenticationFilter" class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
-        <beans:constructor-arg index="0" ref="defaultAuthenticationManager"  />
-        <beans:constructor-arg index="1" ref="basicAuthenticationEntryPoint" />
-    </beans:bean>
+    <beans:bean id="defaultAuthenticationProvider" class="dz.cirtaflow.web.security.DefaultAuthenticationProvider" />
+
 
     <beans:bean id="basicAuthenticationEntryPoint" class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint" >
         <beans:property name="realmName" value="cirtaflow_security_realm" />
@@ -71,12 +68,6 @@
 
     <global-method-security secured-annotations="enabled" />
 
-    <beans:bean id="customUsernamePasswordAuthFilter" class="dz.cirtaflow.web.security.AuthenticationFilter" >
-        <beans:property name="allowSessionCreation" value="true" />
-        <beans:property name="authenticationManager" ref="defaultAuthenticationManager" />
-        <beans:property name="usernameParameter" value="username" />
-        <beans:property name="passwordParameter" value="password" />
-        <beans:property name="servletContext" ref="servletContext" />
-    </beans:bean>
+
 
 </beans:beans>

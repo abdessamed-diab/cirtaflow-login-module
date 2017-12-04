@@ -5,30 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_DEADLETTER_JOB")
-@XmlRootElement
+@Table(name = "ACT_RU_DEADLETTER_JOB", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuDeadletterJob.findAll", query = "SELECT a FROM ActRuDeadletterJob a")
-    , @NamedQuery(name = "ActRuDeadletterJob.findById", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByRev", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByType", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.type = :type")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByExclusive", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.exclusive = :exclusive")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByExceptionMsg", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.exceptionMsg = :exceptionMsg")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByDuedate", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.duedate = :duedate")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByRepeat", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.repeat = :repeat")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByHandlerType", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.handlerType = :handlerType")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByHandlerCfg", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.handlerCfg = :handlerCfg")
-    , @NamedQuery(name = "ActRuDeadletterJob.findByTenantId", query = "SELECT a FROM ActRuDeadletterJob a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActRuDeadletterJob.findAll", query = "SELECT a FROM ActRuDeadletterJob a")})
 public class ActRuDeadletterJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,16 +55,16 @@ public class ActRuDeadletterJob implements Serializable {
     @Column(name = "TENANT_ID_", length = 255)
     private String tenantId;
     @JoinColumn(name = "EXCEPTION_STACK_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray exceptionStackId;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
     @JoinColumn(name = "PROCESS_INSTANCE_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution processInstanceId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
 
     public ActRuDeadletterJob() {

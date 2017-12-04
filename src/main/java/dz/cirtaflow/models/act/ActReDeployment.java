@@ -5,29 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RE_DEPLOYMENT")
-@XmlRootElement
+@Table(name = "ACT_RE_DEPLOYMENT", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActReDeployment.findAll", query = "SELECT a FROM ActReDeployment a")
-    , @NamedQuery(name = "ActReDeployment.findById", query = "SELECT a FROM ActReDeployment a WHERE a.id = :id")
-    , @NamedQuery(name = "ActReDeployment.findByName", query = "SELECT a FROM ActReDeployment a WHERE a.name = :name")
-    , @NamedQuery(name = "ActReDeployment.findByCategory", query = "SELECT a FROM ActReDeployment a WHERE a.category = :category")
-    , @NamedQuery(name = "ActReDeployment.findByKey", query = "SELECT a FROM ActReDeployment a WHERE a.key = :key")
-    , @NamedQuery(name = "ActReDeployment.findByTenantId", query = "SELECT a FROM ActReDeployment a WHERE a.tenantId = :tenantId")
-    , @NamedQuery(name = "ActReDeployment.findByDeployTime", query = "SELECT a FROM ActReDeployment a WHERE a.deployTime = :deployTime")
-    , @NamedQuery(name = "ActReDeployment.findByEngineVersion", query = "SELECT a FROM ActReDeployment a WHERE a.engineVersion = :engineVersion")})
+    @NamedQuery(name = "ActReDeployment.findAll", query = "SELECT a FROM ActReDeployment a")})
 public class ActReDeployment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,10 +47,10 @@ public class ActReDeployment implements Serializable {
     private Date deployTime;
     @Column(name = "ENGINE_VERSION_", length = 255)
     private String engineVersion;
-    @OneToMany(mappedBy = "deploymentId", fetch = FetchType.LAZY)
-    private List<ActGeBytearray> actGeBytearrayList;
-    @OneToMany(mappedBy = "deploymentId", fetch = FetchType.LAZY)
-    private List<ActReModel> actReModelList;
+    @OneToMany(mappedBy = "deploymentId")
+    private Collection<ActGeBytearray> actGeBytearrayCollection;
+    @OneToMany(mappedBy = "deploymentId")
+    private Collection<ActReModel> actReModelCollection;
 
     public ActReDeployment() {
     }
@@ -116,22 +115,20 @@ public class ActReDeployment implements Serializable {
         this.engineVersion = engineVersion;
     }
 
-    @XmlTransient
-    public List<ActGeBytearray> getActGeBytearrayList() {
-        return actGeBytearrayList;
+    public Collection<ActGeBytearray> getActGeBytearrayCollection() {
+        return actGeBytearrayCollection;
     }
 
-    public void setActGeBytearrayList(List<ActGeBytearray> actGeBytearrayList) {
-        this.actGeBytearrayList = actGeBytearrayList;
+    public void setActGeBytearrayCollection(Collection<ActGeBytearray> actGeBytearrayCollection) {
+        this.actGeBytearrayCollection = actGeBytearrayCollection;
     }
 
-    @XmlTransient
-    public List<ActReModel> getActReModelList() {
-        return actReModelList;
+    public Collection<ActReModel> getActReModelCollection() {
+        return actReModelCollection;
     }
 
-    public void setActReModelList(List<ActReModel> actReModelList) {
-        this.actReModelList = actReModelList;
+    public void setActReModelCollection(Collection<ActReModel> actReModelCollection) {
+        this.actReModelCollection = actReModelCollection;
     }
 
     @Override

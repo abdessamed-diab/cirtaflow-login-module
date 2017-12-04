@@ -5,29 +5,26 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_VARIABLE")
-@XmlRootElement
+@Table(name = "ACT_RU_VARIABLE", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuVariable.findAll", query = "SELECT a FROM ActRuVariable a")
-    , @NamedQuery(name = "ActRuVariable.findById", query = "SELECT a FROM ActRuVariable a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuVariable.findByRev", query = "SELECT a FROM ActRuVariable a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuVariable.findByType", query = "SELECT a FROM ActRuVariable a WHERE a.type = :type")
-    , @NamedQuery(name = "ActRuVariable.findByName", query = "SELECT a FROM ActRuVariable a WHERE a.name = :name")
-    , @NamedQuery(name = "ActRuVariable.findByTaskId", query = "SELECT a FROM ActRuVariable a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActRuVariable.findByDouble1", query = "SELECT a FROM ActRuVariable a WHERE a.double1 = :double1")
-    , @NamedQuery(name = "ActRuVariable.findByLong1", query = "SELECT a FROM ActRuVariable a WHERE a.long1 = :long1")
-    , @NamedQuery(name = "ActRuVariable.findByText", query = "SELECT a FROM ActRuVariable a WHERE a.text = :text")
-    , @NamedQuery(name = "ActRuVariable.findByText2", query = "SELECT a FROM ActRuVariable a WHERE a.text2 = :text2")})
+    @NamedQuery(name = "ActRuVariable.findAll", query = "SELECT a FROM ActRuVariable a")})
 public class ActRuVariable implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,13 +52,13 @@ public class ActRuVariable implements Serializable {
     @Column(name = "TEXT2_", length = 4000)
     private String text2;
     @JoinColumn(name = "BYTEARRAY_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray bytearrayId;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
     @JoinColumn(name = "PROC_INST_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution procInstId;
 
     public ActRuVariable() {

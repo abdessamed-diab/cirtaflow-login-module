@@ -5,36 +5,29 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_PROCINST", uniqueConstraints = {
+@Table(name = "ACT_HI_PROCINST", catalog = "activiti_cirtaflow_test", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"PROC_INST_ID_"})})
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ActHiProcinst.findAll", query = "SELECT a FROM ActHiProcinst a")
-    , @NamedQuery(name = "ActHiProcinst.findById", query = "SELECT a FROM ActHiProcinst a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiProcinst.findByProcInstId", query = "SELECT a FROM ActHiProcinst a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiProcinst.findByBusinessKey", query = "SELECT a FROM ActHiProcinst a WHERE a.businessKey = :businessKey")
-    , @NamedQuery(name = "ActHiProcinst.findByProcDefId", query = "SELECT a FROM ActHiProcinst a WHERE a.procDefId = :procDefId")
-    , @NamedQuery(name = "ActHiProcinst.findByStartTime", query = "SELECT a FROM ActHiProcinst a WHERE a.startTime = :startTime")
-    , @NamedQuery(name = "ActHiProcinst.findByEndTime", query = "SELECT a FROM ActHiProcinst a WHERE a.endTime = :endTime")
-    , @NamedQuery(name = "ActHiProcinst.findByDuration", query = "SELECT a FROM ActHiProcinst a WHERE a.duration = :duration")
-    , @NamedQuery(name = "ActHiProcinst.findByStartUserId", query = "SELECT a FROM ActHiProcinst a WHERE a.startUserId = :startUserId")
-    , @NamedQuery(name = "ActHiProcinst.findByStartActId", query = "SELECT a FROM ActHiProcinst a WHERE a.startActId = :startActId")
-    , @NamedQuery(name = "ActHiProcinst.findByEndActId", query = "SELECT a FROM ActHiProcinst a WHERE a.endActId = :endActId")
-    , @NamedQuery(name = "ActHiProcinst.findBySuperProcessInstanceId", query = "SELECT a FROM ActHiProcinst a WHERE a.superProcessInstanceId = :superProcessInstanceId")
-    , @NamedQuery(name = "ActHiProcinst.findByDeleteReason", query = "SELECT a FROM ActHiProcinst a WHERE a.deleteReason = :deleteReason")
-    , @NamedQuery(name = "ActHiProcinst.findByTenantId", query = "SELECT a FROM ActHiProcinst a WHERE a.tenantId = :tenantId")
-    , @NamedQuery(name = "ActHiProcinst.findByName", query = "SELECT a FROM ActHiProcinst a WHERE a.name = :name")})
+    @NamedQuery(name = "ActHiProcinst.findAll", query = "SELECT a FROM ActHiProcinst a")})
 public class ActHiProcinst implements Serializable {
 
     private static final long serialVersionUID = 1L;

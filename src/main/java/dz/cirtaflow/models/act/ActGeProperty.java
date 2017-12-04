@@ -5,22 +5,23 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_GE_PROPERTY")
-@XmlRootElement
+@Table(name = "ACT_GE_PROPERTY", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActGeProperty.findAll", query = "SELECT a FROM ActGeProperty a")
-    , @NamedQuery(name = "ActGeProperty.findByName", query = "SELECT a FROM ActGeProperty a WHERE a.name = :name")
-    , @NamedQuery(name = "ActGeProperty.findByValue", query = "SELECT a FROM ActGeProperty a WHERE a.value = :value")
-    , @NamedQuery(name = "ActGeProperty.findByRev", query = "SELECT a FROM ActGeProperty a WHERE a.rev = :rev")})
+    @NamedQuery(name = "ActGeProperty.findAll", query = "SELECT a FROM ActGeProperty a")})
 public class ActGeProperty implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,36 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_DETAIL")
-@XmlRootElement
+@Table(name = "ACT_HI_DETAIL", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiDetail.findAll", query = "SELECT a FROM ActHiDetail a")
-    , @NamedQuery(name = "ActHiDetail.findById", query = "SELECT a FROM ActHiDetail a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiDetail.findByType", query = "SELECT a FROM ActHiDetail a WHERE a.type = :type")
-    , @NamedQuery(name = "ActHiDetail.findByProcInstId", query = "SELECT a FROM ActHiDetail a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiDetail.findByExecutionId", query = "SELECT a FROM ActHiDetail a WHERE a.executionId = :executionId")
-    , @NamedQuery(name = "ActHiDetail.findByTaskId", query = "SELECT a FROM ActHiDetail a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiDetail.findByActInstId", query = "SELECT a FROM ActHiDetail a WHERE a.actInstId = :actInstId")
-    , @NamedQuery(name = "ActHiDetail.findByName", query = "SELECT a FROM ActHiDetail a WHERE a.name = :name")
-    , @NamedQuery(name = "ActHiDetail.findByVarType", query = "SELECT a FROM ActHiDetail a WHERE a.varType = :varType")
-    , @NamedQuery(name = "ActHiDetail.findByRev", query = "SELECT a FROM ActHiDetail a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActHiDetail.findByTime", query = "SELECT a FROM ActHiDetail a WHERE a.time = :time")
-    , @NamedQuery(name = "ActHiDetail.findByBytearrayId", query = "SELECT a FROM ActHiDetail a WHERE a.bytearrayId = :bytearrayId")
-    , @NamedQuery(name = "ActHiDetail.findByDouble1", query = "SELECT a FROM ActHiDetail a WHERE a.double1 = :double1")
-    , @NamedQuery(name = "ActHiDetail.findByLong1", query = "SELECT a FROM ActHiDetail a WHERE a.long1 = :long1")
-    , @NamedQuery(name = "ActHiDetail.findByText", query = "SELECT a FROM ActHiDetail a WHERE a.text = :text")
-    , @NamedQuery(name = "ActHiDetail.findByText2", query = "SELECT a FROM ActHiDetail a WHERE a.text2 = :text2")})
+    @NamedQuery(name = "ActHiDetail.findAll", query = "SELECT a FROM ActHiDetail a")})
 public class ActHiDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;

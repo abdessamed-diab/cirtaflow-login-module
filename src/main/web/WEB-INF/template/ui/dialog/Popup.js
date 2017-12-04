@@ -15,13 +15,13 @@ class Popup extends React.Component {
                 visibility: props.visibility
             },
             inputs: [],
+            buttons:[],
             views : [],
-            buttonElement: {},
             user : {'first': '', 'last': '', 'email': '', 'pwd': ''}
         };
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.hidePopup= this.hidePopup.bind(this);
-        this.loadFromServer_final= this.loadFromServer_final.bind(this);
+        this.loafFromServer= this.loafFromServer.bind(this);
         this.onclick = this.onclick.bind(this);
     }
 
@@ -31,62 +31,46 @@ class Popup extends React.Component {
         this.refs.popupBoxRef.style.width= this.props.width+'px';
         this.refs.popupBoxRef.style.height= this.props.height+'px';
 
-        this.loadFromServer_final();
+        this.loafFromServer();
     }
 
-    loadFromServer_final () {
-        // create promise chain using follow
-
-        follow(client , this.props.root, [{rel : 'view'}] )
-            // initialize schema for this object [popup]
-        // you can omit this next then, if you do not intend to use schema.
+    loafFromServer() {
+        follow(client, this.props.root, [{rel : 'view'}])
             .then(viewsPromise => {
-                console.log('viewsPromise: ', viewsPromise.entity);
                 return client ({
                     method: 'GET',
-                    path :  viewsPromise.entity._links.profile.href ,
-                    headers : {'accept' : 'application/schema+json'}
+                    path  : viewsPromise.entity._links.profile.href,
+                    headers : {'accept' : "application/schema+json"}
                 }).then(schema => {
-                    console.log('schema: ', schema.entity);
-                    this.schema = schema.entity;
+                    this.schema= schema.entity;
+                    console.log('schema: ', this.schema);
                     return viewsPromise;
                 })
-            // search and locate unique view model attached to this popup
-            // findByName let us find appropriate view mentioned in props.formName
             }).then(viewsPromise => {
                 return client ({
-                    method : 'GET',
-                    path   : viewsPromise.entity._links.search.href+'/findByName?name='+this.props.formName,
-                    headers: {'accept': 'application/schema+json'}
-
-                    // returning only one view
+                    method: 'GET',
+                    path : viewsPromise.entity._links.search.href+'/findByName?name='+this.props.formName,
+                    headers : {'accept' : 'application/schema+json'}
                 }).then(viewPromise => {
-                    console.log('view promise: ', viewPromise.entity);
-                    this.setState({views: [viewPromise.entity]});
-                    return viewPromise.entity.nodes;
-
-                    // return according nodes
-                }).then(nodesPromise => {
-                    console.log('nodes: ', nodesPromise.entity);
-                    var tab = [] ;
-                    for(let inputClazzName in nodesPromise.entity._embedded)
-                        if(inputClazzName.toLowerCase() === 'buttonelement')
-                            this.setState({buttonElement : nodesPromise.entity._embedded[inputClazzName][0] })
-                        else
-                            tab= tab.concat(nodesPromise.entity._embedded[inputClazzName]);
-                    this.setState({inputs : tab});
-                    console.log("new state : ", this.state);
-                    return nodesPromise;
+                    this.setState({views : [ viewPromise.entity ] });
+                    console.log('state view: ', this.state.views);
+                    return viewPromise;
+                }).then(viewPromise=> {
+                    return client ({
+                        method: 'GET',
+                        path: viewPromise.entity._links.self.href+'?projection=withNodes',
+                        headers : {'accept' : 'application/schema+json'}
+                    }).then(inputsPromise => {
+                        console.log('inputs promise : ', inputsPromise.entity.inputs);
+                        this.setState({inputs : inputsPromise.entity.inputs});
+                        this.setState({buttons : inputsPromise.entity.buttons});
+                    });
                 })
-            });
-
-
-
+            })
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if(prevState.buttonElement['type'] ) {
-            console.log('view: ', this.state.views[0].formName);
+        if(!prevState.buttons.length >0 ) {
             if(this.state.views[0].formNoValidate) {
                 let formSubmit = ReactDOM.findDOMNode(this.refs[this.state.views[0].formName]).value;
                 if (!formSubmit)
@@ -94,7 +78,6 @@ class Popup extends React.Component {
                 console.log('form : ', formSubmit);
                 formSubmit.addEventListener("submit", this.onclick);
             }
-
         }
     }
 
@@ -157,9 +140,18 @@ class Popup extends React.Component {
 
     render () {
         let inputs = this.state.inputs.map(input =>
-            <div className='row' key={input._links.self.href} >
+            <div className='row' key={input.id} >
                 <Input  input={input} ref={input.id}/>
             </div>
+        );
+
+        let buttons = this.state.buttons.map(button =>
+            <button className={button.className}
+                    type={button.type}
+                    key={button.content}
+            >
+                {button.content}
+            </button>
         );
 
         let form   = this.state.views.map( view=>
@@ -179,38 +171,27 @@ class Popup extends React.Component {
                 <div className="col-1" ></div>
 
                 <div className='bottom'>
-                    <button className={this.state.buttonElement.className}
-                            type={this.state.buttonElement.type}
-                            title={this.state.buttonElement.title}
-                            id={this.state.buttonElement.id}
-                            // onSubmit={this.onclick}
-                            // onClick={this.onclick}
-
-                    >
-                        {this.state.buttonElement.content}
-                    </button>
+                    {buttons}
                 </div>
             </form>
         );
 
-
-
         return (
             <div onKeyUpCapture={this.hidePopup}>
 
+                {/*top button toggle visibility of this popup window*/}
                 <button  className='ui-button' onClick={this.toggleVisibility}>
                     {this.props.toggleButtonValue}
                 </button>
 
+                {/*add ref add for adjusting the position of the window*/}
                 <div className='popup popup-text'
                      style={this.state.boxVisibility}
                      ref='popupBoxRef'>
                     {form}
                 </div>
-
             </div>
-        );
-
+        )
 
     }
 

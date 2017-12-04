@@ -7,4 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "user", path = "user")
 public interface UserRepository extends CrudRepository<ActIdUser, String>{
 
+    boolean existsByEmail(String email);
 }

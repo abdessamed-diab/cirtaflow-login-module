@@ -5,33 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_TIMER_JOB")
-@XmlRootElement
+@Table(name = "ACT_RU_TIMER_JOB", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuTimerJob.findAll", query = "SELECT a FROM ActRuTimerJob a")
-    , @NamedQuery(name = "ActRuTimerJob.findById", query = "SELECT a FROM ActRuTimerJob a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuTimerJob.findByRev", query = "SELECT a FROM ActRuTimerJob a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuTimerJob.findByType", query = "SELECT a FROM ActRuTimerJob a WHERE a.type = :type")
-    , @NamedQuery(name = "ActRuTimerJob.findByLockExpTime", query = "SELECT a FROM ActRuTimerJob a WHERE a.lockExpTime = :lockExpTime")
-    , @NamedQuery(name = "ActRuTimerJob.findByLockOwner", query = "SELECT a FROM ActRuTimerJob a WHERE a.lockOwner = :lockOwner")
-    , @NamedQuery(name = "ActRuTimerJob.findByExclusive", query = "SELECT a FROM ActRuTimerJob a WHERE a.exclusive = :exclusive")
-    , @NamedQuery(name = "ActRuTimerJob.findByRetries", query = "SELECT a FROM ActRuTimerJob a WHERE a.retries = :retries")
-    , @NamedQuery(name = "ActRuTimerJob.findByExceptionMsg", query = "SELECT a FROM ActRuTimerJob a WHERE a.exceptionMsg = :exceptionMsg")
-    , @NamedQuery(name = "ActRuTimerJob.findByDuedate", query = "SELECT a FROM ActRuTimerJob a WHERE a.duedate = :duedate")
-    , @NamedQuery(name = "ActRuTimerJob.findByRepeat", query = "SELECT a FROM ActRuTimerJob a WHERE a.repeat = :repeat")
-    , @NamedQuery(name = "ActRuTimerJob.findByHandlerType", query = "SELECT a FROM ActRuTimerJob a WHERE a.handlerType = :handlerType")
-    , @NamedQuery(name = "ActRuTimerJob.findByHandlerCfg", query = "SELECT a FROM ActRuTimerJob a WHERE a.handlerCfg = :handlerCfg")
-    , @NamedQuery(name = "ActRuTimerJob.findByTenantId", query = "SELECT a FROM ActRuTimerJob a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActRuTimerJob.findAll", query = "SELECT a FROM ActRuTimerJob a")})
 public class ActRuTimerJob implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,16 +62,16 @@ public class ActRuTimerJob implements Serializable {
     @Column(name = "TENANT_ID_", length = 255)
     private String tenantId;
     @JoinColumn(name = "EXCEPTION_STACK_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray exceptionStackId;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
     @JoinColumn(name = "PROCESS_INSTANCE_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution processInstanceId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
 
     public ActRuTimerJob() {

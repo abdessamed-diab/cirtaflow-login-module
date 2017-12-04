@@ -5,41 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_TASKINST")
-@XmlRootElement
+@Table(name = "ACT_HI_TASKINST", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiTaskinst.findAll", query = "SELECT a FROM ActHiTaskinst a")
-    , @NamedQuery(name = "ActHiTaskinst.findById", query = "SELECT a FROM ActHiTaskinst a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiTaskinst.findByProcDefId", query = "SELECT a FROM ActHiTaskinst a WHERE a.procDefId = :procDefId")
-    , @NamedQuery(name = "ActHiTaskinst.findByTaskDefKey", query = "SELECT a FROM ActHiTaskinst a WHERE a.taskDefKey = :taskDefKey")
-    , @NamedQuery(name = "ActHiTaskinst.findByProcInstId", query = "SELECT a FROM ActHiTaskinst a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiTaskinst.findByExecutionId", query = "SELECT a FROM ActHiTaskinst a WHERE a.executionId = :executionId")
-    , @NamedQuery(name = "ActHiTaskinst.findByName", query = "SELECT a FROM ActHiTaskinst a WHERE a.name = :name")
-    , @NamedQuery(name = "ActHiTaskinst.findByParentTaskId", query = "SELECT a FROM ActHiTaskinst a WHERE a.parentTaskId = :parentTaskId")
-    , @NamedQuery(name = "ActHiTaskinst.findByDescription", query = "SELECT a FROM ActHiTaskinst a WHERE a.description = :description")
-    , @NamedQuery(name = "ActHiTaskinst.findByOwner", query = "SELECT a FROM ActHiTaskinst a WHERE a.owner = :owner")
-    , @NamedQuery(name = "ActHiTaskinst.findByAssignee", query = "SELECT a FROM ActHiTaskinst a WHERE a.assignee = :assignee")
-    , @NamedQuery(name = "ActHiTaskinst.findByStartTime", query = "SELECT a FROM ActHiTaskinst a WHERE a.startTime = :startTime")
-    , @NamedQuery(name = "ActHiTaskinst.findByClaimTime", query = "SELECT a FROM ActHiTaskinst a WHERE a.claimTime = :claimTime")
-    , @NamedQuery(name = "ActHiTaskinst.findByEndTime", query = "SELECT a FROM ActHiTaskinst a WHERE a.endTime = :endTime")
-    , @NamedQuery(name = "ActHiTaskinst.findByDuration", query = "SELECT a FROM ActHiTaskinst a WHERE a.duration = :duration")
-    , @NamedQuery(name = "ActHiTaskinst.findByDeleteReason", query = "SELECT a FROM ActHiTaskinst a WHERE a.deleteReason = :deleteReason")
-    , @NamedQuery(name = "ActHiTaskinst.findByPriority", query = "SELECT a FROM ActHiTaskinst a WHERE a.priority = :priority")
-    , @NamedQuery(name = "ActHiTaskinst.findByDueDate", query = "SELECT a FROM ActHiTaskinst a WHERE a.dueDate = :dueDate")
-    , @NamedQuery(name = "ActHiTaskinst.findByFormKey", query = "SELECT a FROM ActHiTaskinst a WHERE a.formKey = :formKey")
-    , @NamedQuery(name = "ActHiTaskinst.findByCategory", query = "SELECT a FROM ActHiTaskinst a WHERE a.category = :category")
-    , @NamedQuery(name = "ActHiTaskinst.findByTenantId", query = "SELECT a FROM ActHiTaskinst a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActHiTaskinst.findAll", query = "SELECT a FROM ActHiTaskinst a")})
 public class ActHiTaskinst implements Serializable {
 
     private static final long serialVersionUID = 1L;

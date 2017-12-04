@@ -5,26 +5,24 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_ID_INFO")
-@XmlRootElement
+@Table(name = "ACT_ID_INFO", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActIdInfo.findAll", query = "SELECT a FROM ActIdInfo a")
-    , @NamedQuery(name = "ActIdInfo.findById", query = "SELECT a FROM ActIdInfo a WHERE a.id = :id")
-    , @NamedQuery(name = "ActIdInfo.findByRev", query = "SELECT a FROM ActIdInfo a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActIdInfo.findByUserId", query = "SELECT a FROM ActIdInfo a WHERE a.userId = :userId")
-    , @NamedQuery(name = "ActIdInfo.findByType", query = "SELECT a FROM ActIdInfo a WHERE a.type = :type")
-    , @NamedQuery(name = "ActIdInfo.findByKey", query = "SELECT a FROM ActIdInfo a WHERE a.key = :key")
-    , @NamedQuery(name = "ActIdInfo.findByValue", query = "SELECT a FROM ActIdInfo a WHERE a.value = :value")
-    , @NamedQuery(name = "ActIdInfo.findByParentId", query = "SELECT a FROM ActIdInfo a WHERE a.parentId = :parentId")})
+    @NamedQuery(name = "ActIdInfo.findAll", query = "SELECT a FROM ActIdInfo a")})
 public class ActIdInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;

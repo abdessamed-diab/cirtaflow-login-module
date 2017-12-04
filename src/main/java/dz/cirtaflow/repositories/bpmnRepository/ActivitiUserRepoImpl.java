@@ -130,4 +130,14 @@ public class ActivitiUserRepoImpl implements ActivitiUserRepo, DefaultSingletonB
     public Integer count() {
         return this.identityService.createUserQuery().list().size();
     }
+
+    @Override
+    public Iterable<User> findAll() {
+        return this.identityService.createUserQuery().list();
+    }
+
+    @Override
+    public boolean existsByEmail(@NonNull String email) {
+        return this.identityService.createUserQuery().userEmail(email).singleResult() != null;
+    }
 }

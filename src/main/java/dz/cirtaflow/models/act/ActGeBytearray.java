@@ -5,25 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_GE_BYTEARRAY")
-@XmlRootElement
+@Table(name = "ACT_GE_BYTEARRAY", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActGeBytearray.findAll", query = "SELECT a FROM ActGeBytearray a")
-    , @NamedQuery(name = "ActGeBytearray.findById", query = "SELECT a FROM ActGeBytearray a WHERE a.id = :id")
-    , @NamedQuery(name = "ActGeBytearray.findByRev", query = "SELECT a FROM ActGeBytearray a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActGeBytearray.findByName", query = "SELECT a FROM ActGeBytearray a WHERE a.name = :name")
-    , @NamedQuery(name = "ActGeBytearray.findByGenerated", query = "SELECT a FROM ActGeBytearray a WHERE a.generated = :generated")})
+    @NamedQuery(name = "ActGeBytearray.findAll", query = "SELECT a FROM ActGeBytearray a")})
 public class ActGeBytearray implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,24 +44,24 @@ public class ActGeBytearray implements Serializable {
     @Column(name = "GENERATED_")
     private Short generated;
     @JoinColumn(name = "DEPLOYMENT_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReDeployment deploymentId;
-    @OneToMany(mappedBy = "editorSourceValueId", fetch = FetchType.LAZY)
-    private List<ActReModel> actReModelList;
-    @OneToMany(mappedBy = "editorSourceExtraValueId", fetch = FetchType.LAZY)
-    private List<ActReModel> actReModelList1;
-    @OneToMany(mappedBy = "bytearrayId", fetch = FetchType.LAZY)
-    private List<ActRuVariable> actRuVariableList;
-    @OneToMany(mappedBy = "exceptionStackId", fetch = FetchType.LAZY)
-    private List<ActRuDeadletterJob> actRuDeadletterJobList;
-    @OneToMany(mappedBy = "exceptionStackId", fetch = FetchType.LAZY)
-    private List<ActRuJob> actRuJobList;
-    @OneToMany(mappedBy = "infoJsonId", fetch = FetchType.LAZY)
-    private List<ActProcdefInfo> actProcdefInfoList;
-    @OneToMany(mappedBy = "exceptionStackId", fetch = FetchType.LAZY)
-    private List<ActRuSuspendedJob> actRuSuspendedJobList;
-    @OneToMany(mappedBy = "exceptionStackId", fetch = FetchType.LAZY)
-    private List<ActRuTimerJob> actRuTimerJobList;
+    @OneToMany(mappedBy = "editorSourceValueId")
+    private Collection<ActReModel> actReModelCollection;
+    @OneToMany(mappedBy = "editorSourceExtraValueId")
+    private Collection<ActReModel> actReModelCollection1;
+    @OneToMany(mappedBy = "bytearrayId")
+    private Collection<ActRuVariable> actRuVariableCollection;
+    @OneToMany(mappedBy = "exceptionStackId")
+    private Collection<ActRuDeadletterJob> actRuDeadletterJobCollection;
+    @OneToMany(mappedBy = "exceptionStackId")
+    private Collection<ActRuJob> actRuJobCollection;
+    @OneToMany(mappedBy = "infoJsonId")
+    private Collection<ActProcdefInfo> actProcdefInfoCollection;
+    @OneToMany(mappedBy = "exceptionStackId")
+    private Collection<ActRuSuspendedJob> actRuSuspendedJobCollection;
+    @OneToMany(mappedBy = "exceptionStackId")
+    private Collection<ActRuTimerJob> actRuTimerJobCollection;
 
     public ActGeBytearray() {
     }
@@ -115,76 +118,68 @@ public class ActGeBytearray implements Serializable {
         this.deploymentId = deploymentId;
     }
 
-    @XmlTransient
-    public List<ActReModel> getActReModelList() {
-        return actReModelList;
+    public Collection<ActReModel> getActReModelCollection() {
+        return actReModelCollection;
     }
 
-    public void setActReModelList(List<ActReModel> actReModelList) {
-        this.actReModelList = actReModelList;
+    public void setActReModelCollection(Collection<ActReModel> actReModelCollection) {
+        this.actReModelCollection = actReModelCollection;
     }
 
-    @XmlTransient
-    public List<ActReModel> getActReModelList1() {
-        return actReModelList1;
+    public Collection<ActReModel> getActReModelCollection1() {
+        return actReModelCollection1;
     }
 
-    public void setActReModelList1(List<ActReModel> actReModelList1) {
-        this.actReModelList1 = actReModelList1;
+    public void setActReModelCollection1(Collection<ActReModel> actReModelCollection1) {
+        this.actReModelCollection1 = actReModelCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuVariable> getActRuVariableList() {
-        return actRuVariableList;
+    public Collection<ActRuVariable> getActRuVariableCollection() {
+        return actRuVariableCollection;
     }
 
-    public void setActRuVariableList(List<ActRuVariable> actRuVariableList) {
-        this.actRuVariableList = actRuVariableList;
+    public void setActRuVariableCollection(Collection<ActRuVariable> actRuVariableCollection) {
+        this.actRuVariableCollection = actRuVariableCollection;
     }
 
-    @XmlTransient
-    public List<ActRuDeadletterJob> getActRuDeadletterJobList() {
-        return actRuDeadletterJobList;
+    public Collection<ActRuDeadletterJob> getActRuDeadletterJobCollection() {
+        return actRuDeadletterJobCollection;
     }
 
-    public void setActRuDeadletterJobList(List<ActRuDeadletterJob> actRuDeadletterJobList) {
-        this.actRuDeadletterJobList = actRuDeadletterJobList;
+    public void setActRuDeadletterJobCollection(Collection<ActRuDeadletterJob> actRuDeadletterJobCollection) {
+        this.actRuDeadletterJobCollection = actRuDeadletterJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuJob> getActRuJobList() {
-        return actRuJobList;
+    public Collection<ActRuJob> getActRuJobCollection() {
+        return actRuJobCollection;
     }
 
-    public void setActRuJobList(List<ActRuJob> actRuJobList) {
-        this.actRuJobList = actRuJobList;
+    public void setActRuJobCollection(Collection<ActRuJob> actRuJobCollection) {
+        this.actRuJobCollection = actRuJobCollection;
     }
 
-    @XmlTransient
-    public List<ActProcdefInfo> getActProcdefInfoList() {
-        return actProcdefInfoList;
+    public Collection<ActProcdefInfo> getActProcdefInfoCollection() {
+        return actProcdefInfoCollection;
     }
 
-    public void setActProcdefInfoList(List<ActProcdefInfo> actProcdefInfoList) {
-        this.actProcdefInfoList = actProcdefInfoList;
+    public void setActProcdefInfoCollection(Collection<ActProcdefInfo> actProcdefInfoCollection) {
+        this.actProcdefInfoCollection = actProcdefInfoCollection;
     }
 
-    @XmlTransient
-    public List<ActRuSuspendedJob> getActRuSuspendedJobList() {
-        return actRuSuspendedJobList;
+    public Collection<ActRuSuspendedJob> getActRuSuspendedJobCollection() {
+        return actRuSuspendedJobCollection;
     }
 
-    public void setActRuSuspendedJobList(List<ActRuSuspendedJob> actRuSuspendedJobList) {
-        this.actRuSuspendedJobList = actRuSuspendedJobList;
+    public void setActRuSuspendedJobCollection(Collection<ActRuSuspendedJob> actRuSuspendedJobCollection) {
+        this.actRuSuspendedJobCollection = actRuSuspendedJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuTimerJob> getActRuTimerJobList() {
-        return actRuTimerJobList;
+    public Collection<ActRuTimerJob> getActRuTimerJobCollection() {
+        return actRuTimerJobCollection;
     }
 
-    public void setActRuTimerJobList(List<ActRuTimerJob> actRuTimerJobList) {
-        this.actRuTimerJobList = actRuTimerJobList;
+    public void setActRuTimerJobCollection(Collection<ActRuTimerJob> actRuTimerJobCollection) {
+        this.actRuTimerJobCollection = actRuTimerJobCollection;
     }
 
     @Override

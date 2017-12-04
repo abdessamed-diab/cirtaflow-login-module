@@ -5,25 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_ID_GROUP")
-@XmlRootElement
+@Table(name = "ACT_ID_GROUP", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActIdGroup.findAll", query = "SELECT a FROM ActIdGroup a")
-    , @NamedQuery(name = "ActIdGroup.findById", query = "SELECT a FROM ActIdGroup a WHERE a.id = :id")
-    , @NamedQuery(name = "ActIdGroup.findByRev", query = "SELECT a FROM ActIdGroup a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActIdGroup.findByName", query = "SELECT a FROM ActIdGroup a WHERE a.name = :name")
-    , @NamedQuery(name = "ActIdGroup.findByType", query = "SELECT a FROM ActIdGroup a WHERE a.type = :type")})
+    @NamedQuery(name = "ActIdGroup.findAll", query = "SELECT a FROM ActIdGroup a")})
 public class ActIdGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +42,8 @@ public class ActIdGroup implements Serializable {
     @JoinTable(name = "ACT_ID_MEMBERSHIP", joinColumns = {
         @JoinColumn(name = "GROUP_ID_", referencedColumnName = "ID_", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "USER_ID_", referencedColumnName = "ID_", nullable = false)})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<ActIdUser> actIdUserList;
+    @ManyToMany
+    private Collection<ActIdUser> actIdUserCollection;
 
     public ActIdGroup() {
     }
@@ -82,13 +84,12 @@ public class ActIdGroup implements Serializable {
         this.type = type;
     }
 
-    @XmlTransient
-    public List<ActIdUser> getActIdUserList() {
-        return actIdUserList;
+    public Collection<ActIdUser> getActIdUserCollection() {
+        return actIdUserCollection;
     }
 
-    public void setActIdUserList(List<ActIdUser> actIdUserList) {
-        this.actIdUserList = actIdUserList;
+    public void setActIdUserCollection(Collection<ActIdUser> actIdUserCollection) {
+        this.actIdUserCollection = actIdUserCollection;
     }
 
     @Override

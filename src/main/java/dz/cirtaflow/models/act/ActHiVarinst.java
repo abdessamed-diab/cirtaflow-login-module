@@ -5,35 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_VARINST")
-@XmlRootElement
+@Table(name = "ACT_HI_VARINST", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiVarinst.findAll", query = "SELECT a FROM ActHiVarinst a")
-    , @NamedQuery(name = "ActHiVarinst.findById", query = "SELECT a FROM ActHiVarinst a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiVarinst.findByProcInstId", query = "SELECT a FROM ActHiVarinst a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiVarinst.findByExecutionId", query = "SELECT a FROM ActHiVarinst a WHERE a.executionId = :executionId")
-    , @NamedQuery(name = "ActHiVarinst.findByTaskId", query = "SELECT a FROM ActHiVarinst a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiVarinst.findByName", query = "SELECT a FROM ActHiVarinst a WHERE a.name = :name")
-    , @NamedQuery(name = "ActHiVarinst.findByVarType", query = "SELECT a FROM ActHiVarinst a WHERE a.varType = :varType")
-    , @NamedQuery(name = "ActHiVarinst.findByRev", query = "SELECT a FROM ActHiVarinst a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActHiVarinst.findByBytearrayId", query = "SELECT a FROM ActHiVarinst a WHERE a.bytearrayId = :bytearrayId")
-    , @NamedQuery(name = "ActHiVarinst.findByDouble1", query = "SELECT a FROM ActHiVarinst a WHERE a.double1 = :double1")
-    , @NamedQuery(name = "ActHiVarinst.findByLong1", query = "SELECT a FROM ActHiVarinst a WHERE a.long1 = :long1")
-    , @NamedQuery(name = "ActHiVarinst.findByText", query = "SELECT a FROM ActHiVarinst a WHERE a.text = :text")
-    , @NamedQuery(name = "ActHiVarinst.findByText2", query = "SELECT a FROM ActHiVarinst a WHERE a.text2 = :text2")
-    , @NamedQuery(name = "ActHiVarinst.findByCreateTime", query = "SELECT a FROM ActHiVarinst a WHERE a.createTime = :createTime")
-    , @NamedQuery(name = "ActHiVarinst.findByLastUpdatedTime", query = "SELECT a FROM ActHiVarinst a WHERE a.lastUpdatedTime = :lastUpdatedTime")})
+    @NamedQuery(name = "ActHiVarinst.findAll", query = "SELECT a FROM ActHiVarinst a")})
 public class ActHiVarinst implements Serializable {
 
     private static final long serialVersionUID = 1L;

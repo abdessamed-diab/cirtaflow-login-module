@@ -5,39 +5,30 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_TASK")
-@XmlRootElement
+@Table(name = "ACT_RU_TASK", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuTask.findAll", query = "SELECT a FROM ActRuTask a")
-    , @NamedQuery(name = "ActRuTask.findById", query = "SELECT a FROM ActRuTask a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuTask.findByRev", query = "SELECT a FROM ActRuTask a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuTask.findByName", query = "SELECT a FROM ActRuTask a WHERE a.name = :name")
-    , @NamedQuery(name = "ActRuTask.findByParentTaskId", query = "SELECT a FROM ActRuTask a WHERE a.parentTaskId = :parentTaskId")
-    , @NamedQuery(name = "ActRuTask.findByDescription", query = "SELECT a FROM ActRuTask a WHERE a.description = :description")
-    , @NamedQuery(name = "ActRuTask.findByTaskDefKey", query = "SELECT a FROM ActRuTask a WHERE a.taskDefKey = :taskDefKey")
-    , @NamedQuery(name = "ActRuTask.findByOwner", query = "SELECT a FROM ActRuTask a WHERE a.owner = :owner")
-    , @NamedQuery(name = "ActRuTask.findByAssignee", query = "SELECT a FROM ActRuTask a WHERE a.assignee = :assignee")
-    , @NamedQuery(name = "ActRuTask.findByDelegation", query = "SELECT a FROM ActRuTask a WHERE a.delegation = :delegation")
-    , @NamedQuery(name = "ActRuTask.findByPriority", query = "SELECT a FROM ActRuTask a WHERE a.priority = :priority")
-    , @NamedQuery(name = "ActRuTask.findByCreateTime", query = "SELECT a FROM ActRuTask a WHERE a.createTime = :createTime")
-    , @NamedQuery(name = "ActRuTask.findByDueDate", query = "SELECT a FROM ActRuTask a WHERE a.dueDate = :dueDate")
-    , @NamedQuery(name = "ActRuTask.findByCategory", query = "SELECT a FROM ActRuTask a WHERE a.category = :category")
-    , @NamedQuery(name = "ActRuTask.findBySuspensionState", query = "SELECT a FROM ActRuTask a WHERE a.suspensionState = :suspensionState")
-    , @NamedQuery(name = "ActRuTask.findByTenantId", query = "SELECT a FROM ActRuTask a WHERE a.tenantId = :tenantId")
-    , @NamedQuery(name = "ActRuTask.findByFormKey", query = "SELECT a FROM ActRuTask a WHERE a.formKey = :formKey")
-    , @NamedQuery(name = "ActRuTask.findByClaimTime", query = "SELECT a FROM ActRuTask a WHERE a.claimTime = :claimTime")})
+    @NamedQuery(name = "ActRuTask.findAll", query = "SELECT a FROM ActRuTask a")})
 public class ActRuTask implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,16 +72,16 @@ public class ActRuTask implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date claimTime;
     @JoinColumn(name = "EXECUTION_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution executionId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
     @JoinColumn(name = "PROC_INST_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution procInstId;
-    @OneToMany(mappedBy = "taskId", fetch = FetchType.LAZY)
-    private List<ActRuIdentitylink> actRuIdentitylinkList;
+    @OneToMany(mappedBy = "taskId")
+    private Collection<ActRuIdentitylink> actRuIdentitylinkCollection;
 
     public ActRuTask() {
     }
@@ -259,13 +250,12 @@ public class ActRuTask implements Serializable {
         this.procInstId = procInstId;
     }
 
-    @XmlTransient
-    public List<ActRuIdentitylink> getActRuIdentitylinkList() {
-        return actRuIdentitylinkList;
+    public Collection<ActRuIdentitylink> getActRuIdentitylinkCollection() {
+        return actRuIdentitylinkCollection;
     }
 
-    public void setActRuIdentitylinkList(List<ActRuIdentitylink> actRuIdentitylinkList) {
-        this.actRuIdentitylinkList = actRuIdentitylinkList;
+    public void setActRuIdentitylinkCollection(Collection<ActRuIdentitylink> actRuIdentitylinkCollection) {
+        this.actRuIdentitylinkCollection = actRuIdentitylinkCollection;
     }
 
     @Override

@@ -5,31 +5,29 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_EVT_LOG")
-@XmlRootElement
+@Table(name = "ACT_EVT_LOG", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActEvtLog.findAll", query = "SELECT a FROM ActEvtLog a")
-    , @NamedQuery(name = "ActEvtLog.findByLogNr", query = "SELECT a FROM ActEvtLog a WHERE a.logNr = :logNr")
-    , @NamedQuery(name = "ActEvtLog.findByType", query = "SELECT a FROM ActEvtLog a WHERE a.type = :type")
-    , @NamedQuery(name = "ActEvtLog.findByProcDefId", query = "SELECT a FROM ActEvtLog a WHERE a.procDefId = :procDefId")
-    , @NamedQuery(name = "ActEvtLog.findByProcInstId", query = "SELECT a FROM ActEvtLog a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActEvtLog.findByExecutionId", query = "SELECT a FROM ActEvtLog a WHERE a.executionId = :executionId")
-    , @NamedQuery(name = "ActEvtLog.findByTaskId", query = "SELECT a FROM ActEvtLog a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActEvtLog.findByTimeStamp", query = "SELECT a FROM ActEvtLog a WHERE a.timeStamp = :timeStamp")
-    , @NamedQuery(name = "ActEvtLog.findByUserId", query = "SELECT a FROM ActEvtLog a WHERE a.userId = :userId")
-    , @NamedQuery(name = "ActEvtLog.findByLockOwner", query = "SELECT a FROM ActEvtLog a WHERE a.lockOwner = :lockOwner")
-    , @NamedQuery(name = "ActEvtLog.findByLockTime", query = "SELECT a FROM ActEvtLog a WHERE a.lockTime = :lockTime")
-    , @NamedQuery(name = "ActEvtLog.findByIsProcessed", query = "SELECT a FROM ActEvtLog a WHERE a.isProcessed = :isProcessed")})
+    @NamedQuery(name = "ActEvtLog.findAll", query = "SELECT a FROM ActEvtLog a")})
 public class ActEvtLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

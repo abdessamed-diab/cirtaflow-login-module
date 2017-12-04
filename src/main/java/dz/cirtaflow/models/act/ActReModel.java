@@ -5,30 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RE_MODEL")
-@XmlRootElement
+@Table(name = "ACT_RE_MODEL", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActReModel.findAll", query = "SELECT a FROM ActReModel a")
-    , @NamedQuery(name = "ActReModel.findById", query = "SELECT a FROM ActReModel a WHERE a.id = :id")
-    , @NamedQuery(name = "ActReModel.findByRev", query = "SELECT a FROM ActReModel a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActReModel.findByName", query = "SELECT a FROM ActReModel a WHERE a.name = :name")
-    , @NamedQuery(name = "ActReModel.findByKey", query = "SELECT a FROM ActReModel a WHERE a.key = :key")
-    , @NamedQuery(name = "ActReModel.findByCategory", query = "SELECT a FROM ActReModel a WHERE a.category = :category")
-    , @NamedQuery(name = "ActReModel.findByCreateTime", query = "SELECT a FROM ActReModel a WHERE a.createTime = :createTime")
-    , @NamedQuery(name = "ActReModel.findByLastUpdateTime", query = "SELECT a FROM ActReModel a WHERE a.lastUpdateTime = :lastUpdateTime")
-    , @NamedQuery(name = "ActReModel.findByVersion", query = "SELECT a FROM ActReModel a WHERE a.version = :version")
-    , @NamedQuery(name = "ActReModel.findByMetaInfo", query = "SELECT a FROM ActReModel a WHERE a.metaInfo = :metaInfo")
-    , @NamedQuery(name = "ActReModel.findByTenantId", query = "SELECT a FROM ActReModel a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActReModel.findAll", query = "SELECT a FROM ActReModel a")})
 public class ActReModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,13 +55,13 @@ public class ActReModel implements Serializable {
     @Column(name = "TENANT_ID_", length = 255)
     private String tenantId;
     @JoinColumn(name = "DEPLOYMENT_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReDeployment deploymentId;
     @JoinColumn(name = "EDITOR_SOURCE_VALUE_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray editorSourceValueId;
     @JoinColumn(name = "EDITOR_SOURCE_EXTRA_VALUE_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray editorSourceExtraValueId;
 
     public ActReModel() {

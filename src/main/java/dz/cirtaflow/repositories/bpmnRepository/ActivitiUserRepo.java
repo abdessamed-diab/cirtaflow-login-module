@@ -67,6 +67,10 @@ public interface ActivitiUserRepo extends Serializable{
 
     Integer                count();
 
+    Iterable<User>      findAll();
+
+    boolean             existsByEmail(@NonNull String email);
+
 //    drop table ACT_GE_PROPERTY cascade constraints;
 //    drop table ACT_RU_VARIABLE cascade constraints;
 //    drop table ACT_GE_BYTEARRAY cascade constraints;

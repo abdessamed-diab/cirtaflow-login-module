@@ -5,48 +5,30 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_EXECUTION")
-@XmlRootElement
+@Table(name = "ACT_RU_EXECUTION", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuExecution.findAll", query = "SELECT a FROM ActRuExecution a")
-    , @NamedQuery(name = "ActRuExecution.findById", query = "SELECT a FROM ActRuExecution a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuExecution.findByRev", query = "SELECT a FROM ActRuExecution a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuExecution.findByBusinessKey", query = "SELECT a FROM ActRuExecution a WHERE a.businessKey = :businessKey")
-    , @NamedQuery(name = "ActRuExecution.findByRootProcInstId", query = "SELECT a FROM ActRuExecution a WHERE a.rootProcInstId = :rootProcInstId")
-    , @NamedQuery(name = "ActRuExecution.findByActId", query = "SELECT a FROM ActRuExecution a WHERE a.actId = :actId")
-    , @NamedQuery(name = "ActRuExecution.findByIsActive", query = "SELECT a FROM ActRuExecution a WHERE a.isActive = :isActive")
-    , @NamedQuery(name = "ActRuExecution.findByIsConcurrent", query = "SELECT a FROM ActRuExecution a WHERE a.isConcurrent = :isConcurrent")
-    , @NamedQuery(name = "ActRuExecution.findByIsScope", query = "SELECT a FROM ActRuExecution a WHERE a.isScope = :isScope")
-    , @NamedQuery(name = "ActRuExecution.findByIsEventScope", query = "SELECT a FROM ActRuExecution a WHERE a.isEventScope = :isEventScope")
-    , @NamedQuery(name = "ActRuExecution.findByIsMiRoot", query = "SELECT a FROM ActRuExecution a WHERE a.isMiRoot = :isMiRoot")
-    , @NamedQuery(name = "ActRuExecution.findBySuspensionState", query = "SELECT a FROM ActRuExecution a WHERE a.suspensionState = :suspensionState")
-    , @NamedQuery(name = "ActRuExecution.findByCachedEntState", query = "SELECT a FROM ActRuExecution a WHERE a.cachedEntState = :cachedEntState")
-    , @NamedQuery(name = "ActRuExecution.findByTenantId", query = "SELECT a FROM ActRuExecution a WHERE a.tenantId = :tenantId")
-    , @NamedQuery(name = "ActRuExecution.findByName", query = "SELECT a FROM ActRuExecution a WHERE a.name = :name")
-    , @NamedQuery(name = "ActRuExecution.findByStartTime", query = "SELECT a FROM ActRuExecution a WHERE a.startTime = :startTime")
-    , @NamedQuery(name = "ActRuExecution.findByStartUserId", query = "SELECT a FROM ActRuExecution a WHERE a.startUserId = :startUserId")
-    , @NamedQuery(name = "ActRuExecution.findByLockTime", query = "SELECT a FROM ActRuExecution a WHERE a.lockTime = :lockTime")
-    , @NamedQuery(name = "ActRuExecution.findByIsCountEnabled", query = "SELECT a FROM ActRuExecution a WHERE a.isCountEnabled = :isCountEnabled")
-    , @NamedQuery(name = "ActRuExecution.findByEvtSubscrCount", query = "SELECT a FROM ActRuExecution a WHERE a.evtSubscrCount = :evtSubscrCount")
-    , @NamedQuery(name = "ActRuExecution.findByTaskCount", query = "SELECT a FROM ActRuExecution a WHERE a.taskCount = :taskCount")
-    , @NamedQuery(name = "ActRuExecution.findByJobCount", query = "SELECT a FROM ActRuExecution a WHERE a.jobCount = :jobCount")
-    , @NamedQuery(name = "ActRuExecution.findByTimerJobCount", query = "SELECT a FROM ActRuExecution a WHERE a.timerJobCount = :timerJobCount")
-    , @NamedQuery(name = "ActRuExecution.findBySuspJobCount", query = "SELECT a FROM ActRuExecution a WHERE a.suspJobCount = :suspJobCount")
-    , @NamedQuery(name = "ActRuExecution.findByDeadletterJobCount", query = "SELECT a FROM ActRuExecution a WHERE a.deadletterJobCount = :deadletterJobCount")
-    , @NamedQuery(name = "ActRuExecution.findByVarCount", query = "SELECT a FROM ActRuExecution a WHERE a.varCount = :varCount")
-    , @NamedQuery(name = "ActRuExecution.findByIdLinkCount", query = "SELECT a FROM ActRuExecution a WHERE a.idLinkCount = :idLinkCount")})
+    @NamedQuery(name = "ActRuExecution.findAll", query = "SELECT a FROM ActRuExecution a")})
 public class ActRuExecution implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -106,52 +88,52 @@ public class ActRuExecution implements Serializable {
     private Integer varCount;
     @Column(name = "ID_LINK_COUNT_")
     private Integer idLinkCount;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuEventSubscr> actRuEventSubscrList;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuVariable> actRuVariableList;
-    @OneToMany(mappedBy = "procInstId", fetch = FetchType.LAZY)
-    private List<ActRuVariable> actRuVariableList1;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuTask> actRuTaskList;
-    @OneToMany(mappedBy = "procInstId", fetch = FetchType.LAZY)
-    private List<ActRuTask> actRuTaskList1;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuDeadletterJob> actRuDeadletterJobList;
-    @OneToMany(mappedBy = "processInstanceId", fetch = FetchType.LAZY)
-    private List<ActRuDeadletterJob> actRuDeadletterJobList1;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuJob> actRuJobList;
-    @OneToMany(mappedBy = "processInstanceId", fetch = FetchType.LAZY)
-    private List<ActRuJob> actRuJobList1;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuSuspendedJob> actRuSuspendedJobList;
-    @OneToMany(mappedBy = "processInstanceId", fetch = FetchType.LAZY)
-    private List<ActRuSuspendedJob> actRuSuspendedJobList1;
-    @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
-    private List<ActRuExecution> actRuExecutionList;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuEventSubscr> actRuEventSubscrCollection;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuVariable> actRuVariableCollection;
+    @OneToMany(mappedBy = "procInstId")
+    private Collection<ActRuVariable> actRuVariableCollection1;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuTask> actRuTaskCollection;
+    @OneToMany(mappedBy = "procInstId")
+    private Collection<ActRuTask> actRuTaskCollection1;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuDeadletterJob> actRuDeadletterJobCollection;
+    @OneToMany(mappedBy = "processInstanceId")
+    private Collection<ActRuDeadletterJob> actRuDeadletterJobCollection1;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuJob> actRuJobCollection;
+    @OneToMany(mappedBy = "processInstanceId")
+    private Collection<ActRuJob> actRuJobCollection1;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuSuspendedJob> actRuSuspendedJobCollection;
+    @OneToMany(mappedBy = "processInstanceId")
+    private Collection<ActRuSuspendedJob> actRuSuspendedJobCollection1;
+    @OneToMany(mappedBy = "parentId")
+    private Collection<ActRuExecution> actRuExecutionCollection;
     @JoinColumn(name = "PARENT_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution parentId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
-    @OneToMany(mappedBy = "procInstId", fetch = FetchType.LAZY)
-    private List<ActRuExecution> actRuExecutionList1;
+    @OneToMany(mappedBy = "procInstId")
+    private Collection<ActRuExecution> actRuExecutionCollection1;
     @JoinColumn(name = "PROC_INST_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution procInstId;
-    @OneToMany(mappedBy = "superExec", fetch = FetchType.LAZY)
-    private List<ActRuExecution> actRuExecutionList2;
+    @OneToMany(mappedBy = "superExec")
+    private Collection<ActRuExecution> actRuExecutionCollection2;
     @JoinColumn(name = "SUPER_EXEC_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution superExec;
-    @OneToMany(mappedBy = "procInstId", fetch = FetchType.LAZY)
-    private List<ActRuIdentitylink> actRuIdentitylinkList;
-    @OneToMany(mappedBy = "executionId", fetch = FetchType.LAZY)
-    private List<ActRuTimerJob> actRuTimerJobList;
-    @OneToMany(mappedBy = "processInstanceId", fetch = FetchType.LAZY)
-    private List<ActRuTimerJob> actRuTimerJobList1;
+    @OneToMany(mappedBy = "procInstId")
+    private Collection<ActRuIdentitylink> actRuIdentitylinkCollection;
+    @OneToMany(mappedBy = "executionId")
+    private Collection<ActRuTimerJob> actRuTimerJobCollection;
+    @OneToMany(mappedBy = "processInstanceId")
+    private Collection<ActRuTimerJob> actRuTimerJobCollection1;
 
     public ActRuExecution() {
     }
@@ -368,112 +350,100 @@ public class ActRuExecution implements Serializable {
         this.idLinkCount = idLinkCount;
     }
 
-    @XmlTransient
-    public List<ActRuEventSubscr> getActRuEventSubscrList() {
-        return actRuEventSubscrList;
+    public Collection<ActRuEventSubscr> getActRuEventSubscrCollection() {
+        return actRuEventSubscrCollection;
     }
 
-    public void setActRuEventSubscrList(List<ActRuEventSubscr> actRuEventSubscrList) {
-        this.actRuEventSubscrList = actRuEventSubscrList;
+    public void setActRuEventSubscrCollection(Collection<ActRuEventSubscr> actRuEventSubscrCollection) {
+        this.actRuEventSubscrCollection = actRuEventSubscrCollection;
     }
 
-    @XmlTransient
-    public List<ActRuVariable> getActRuVariableList() {
-        return actRuVariableList;
+    public Collection<ActRuVariable> getActRuVariableCollection() {
+        return actRuVariableCollection;
     }
 
-    public void setActRuVariableList(List<ActRuVariable> actRuVariableList) {
-        this.actRuVariableList = actRuVariableList;
+    public void setActRuVariableCollection(Collection<ActRuVariable> actRuVariableCollection) {
+        this.actRuVariableCollection = actRuVariableCollection;
     }
 
-    @XmlTransient
-    public List<ActRuVariable> getActRuVariableList1() {
-        return actRuVariableList1;
+    public Collection<ActRuVariable> getActRuVariableCollection1() {
+        return actRuVariableCollection1;
     }
 
-    public void setActRuVariableList1(List<ActRuVariable> actRuVariableList1) {
-        this.actRuVariableList1 = actRuVariableList1;
+    public void setActRuVariableCollection1(Collection<ActRuVariable> actRuVariableCollection1) {
+        this.actRuVariableCollection1 = actRuVariableCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuTask> getActRuTaskList() {
-        return actRuTaskList;
+    public Collection<ActRuTask> getActRuTaskCollection() {
+        return actRuTaskCollection;
     }
 
-    public void setActRuTaskList(List<ActRuTask> actRuTaskList) {
-        this.actRuTaskList = actRuTaskList;
+    public void setActRuTaskCollection(Collection<ActRuTask> actRuTaskCollection) {
+        this.actRuTaskCollection = actRuTaskCollection;
     }
 
-    @XmlTransient
-    public List<ActRuTask> getActRuTaskList1() {
-        return actRuTaskList1;
+    public Collection<ActRuTask> getActRuTaskCollection1() {
+        return actRuTaskCollection1;
     }
 
-    public void setActRuTaskList1(List<ActRuTask> actRuTaskList1) {
-        this.actRuTaskList1 = actRuTaskList1;
+    public void setActRuTaskCollection1(Collection<ActRuTask> actRuTaskCollection1) {
+        this.actRuTaskCollection1 = actRuTaskCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuDeadletterJob> getActRuDeadletterJobList() {
-        return actRuDeadletterJobList;
+    public Collection<ActRuDeadletterJob> getActRuDeadletterJobCollection() {
+        return actRuDeadletterJobCollection;
     }
 
-    public void setActRuDeadletterJobList(List<ActRuDeadletterJob> actRuDeadletterJobList) {
-        this.actRuDeadletterJobList = actRuDeadletterJobList;
+    public void setActRuDeadletterJobCollection(Collection<ActRuDeadletterJob> actRuDeadletterJobCollection) {
+        this.actRuDeadletterJobCollection = actRuDeadletterJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuDeadletterJob> getActRuDeadletterJobList1() {
-        return actRuDeadletterJobList1;
+    public Collection<ActRuDeadletterJob> getActRuDeadletterJobCollection1() {
+        return actRuDeadletterJobCollection1;
     }
 
-    public void setActRuDeadletterJobList1(List<ActRuDeadletterJob> actRuDeadletterJobList1) {
-        this.actRuDeadletterJobList1 = actRuDeadletterJobList1;
+    public void setActRuDeadletterJobCollection1(Collection<ActRuDeadletterJob> actRuDeadletterJobCollection1) {
+        this.actRuDeadletterJobCollection1 = actRuDeadletterJobCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuJob> getActRuJobList() {
-        return actRuJobList;
+    public Collection<ActRuJob> getActRuJobCollection() {
+        return actRuJobCollection;
     }
 
-    public void setActRuJobList(List<ActRuJob> actRuJobList) {
-        this.actRuJobList = actRuJobList;
+    public void setActRuJobCollection(Collection<ActRuJob> actRuJobCollection) {
+        this.actRuJobCollection = actRuJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuJob> getActRuJobList1() {
-        return actRuJobList1;
+    public Collection<ActRuJob> getActRuJobCollection1() {
+        return actRuJobCollection1;
     }
 
-    public void setActRuJobList1(List<ActRuJob> actRuJobList1) {
-        this.actRuJobList1 = actRuJobList1;
+    public void setActRuJobCollection1(Collection<ActRuJob> actRuJobCollection1) {
+        this.actRuJobCollection1 = actRuJobCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuSuspendedJob> getActRuSuspendedJobList() {
-        return actRuSuspendedJobList;
+    public Collection<ActRuSuspendedJob> getActRuSuspendedJobCollection() {
+        return actRuSuspendedJobCollection;
     }
 
-    public void setActRuSuspendedJobList(List<ActRuSuspendedJob> actRuSuspendedJobList) {
-        this.actRuSuspendedJobList = actRuSuspendedJobList;
+    public void setActRuSuspendedJobCollection(Collection<ActRuSuspendedJob> actRuSuspendedJobCollection) {
+        this.actRuSuspendedJobCollection = actRuSuspendedJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuSuspendedJob> getActRuSuspendedJobList1() {
-        return actRuSuspendedJobList1;
+    public Collection<ActRuSuspendedJob> getActRuSuspendedJobCollection1() {
+        return actRuSuspendedJobCollection1;
     }
 
-    public void setActRuSuspendedJobList1(List<ActRuSuspendedJob> actRuSuspendedJobList1) {
-        this.actRuSuspendedJobList1 = actRuSuspendedJobList1;
+    public void setActRuSuspendedJobCollection1(Collection<ActRuSuspendedJob> actRuSuspendedJobCollection1) {
+        this.actRuSuspendedJobCollection1 = actRuSuspendedJobCollection1;
     }
 
-    @XmlTransient
-    public List<ActRuExecution> getActRuExecutionList() {
-        return actRuExecutionList;
+    public Collection<ActRuExecution> getActRuExecutionCollection() {
+        return actRuExecutionCollection;
     }
 
-    public void setActRuExecutionList(List<ActRuExecution> actRuExecutionList) {
-        this.actRuExecutionList = actRuExecutionList;
+    public void setActRuExecutionCollection(Collection<ActRuExecution> actRuExecutionCollection) {
+        this.actRuExecutionCollection = actRuExecutionCollection;
     }
 
     public ActRuExecution getParentId() {
@@ -492,13 +462,12 @@ public class ActRuExecution implements Serializable {
         this.procDefId = procDefId;
     }
 
-    @XmlTransient
-    public List<ActRuExecution> getActRuExecutionList1() {
-        return actRuExecutionList1;
+    public Collection<ActRuExecution> getActRuExecutionCollection1() {
+        return actRuExecutionCollection1;
     }
 
-    public void setActRuExecutionList1(List<ActRuExecution> actRuExecutionList1) {
-        this.actRuExecutionList1 = actRuExecutionList1;
+    public void setActRuExecutionCollection1(Collection<ActRuExecution> actRuExecutionCollection1) {
+        this.actRuExecutionCollection1 = actRuExecutionCollection1;
     }
 
     public ActRuExecution getProcInstId() {
@@ -509,13 +478,12 @@ public class ActRuExecution implements Serializable {
         this.procInstId = procInstId;
     }
 
-    @XmlTransient
-    public List<ActRuExecution> getActRuExecutionList2() {
-        return actRuExecutionList2;
+    public Collection<ActRuExecution> getActRuExecutionCollection2() {
+        return actRuExecutionCollection2;
     }
 
-    public void setActRuExecutionList2(List<ActRuExecution> actRuExecutionList2) {
-        this.actRuExecutionList2 = actRuExecutionList2;
+    public void setActRuExecutionCollection2(Collection<ActRuExecution> actRuExecutionCollection2) {
+        this.actRuExecutionCollection2 = actRuExecutionCollection2;
     }
 
     public ActRuExecution getSuperExec() {
@@ -526,31 +494,28 @@ public class ActRuExecution implements Serializable {
         this.superExec = superExec;
     }
 
-    @XmlTransient
-    public List<ActRuIdentitylink> getActRuIdentitylinkList() {
-        return actRuIdentitylinkList;
+    public Collection<ActRuIdentitylink> getActRuIdentitylinkCollection() {
+        return actRuIdentitylinkCollection;
     }
 
-    public void setActRuIdentitylinkList(List<ActRuIdentitylink> actRuIdentitylinkList) {
-        this.actRuIdentitylinkList = actRuIdentitylinkList;
+    public void setActRuIdentitylinkCollection(Collection<ActRuIdentitylink> actRuIdentitylinkCollection) {
+        this.actRuIdentitylinkCollection = actRuIdentitylinkCollection;
     }
 
-    @XmlTransient
-    public List<ActRuTimerJob> getActRuTimerJobList() {
-        return actRuTimerJobList;
+    public Collection<ActRuTimerJob> getActRuTimerJobCollection() {
+        return actRuTimerJobCollection;
     }
 
-    public void setActRuTimerJobList(List<ActRuTimerJob> actRuTimerJobList) {
-        this.actRuTimerJobList = actRuTimerJobList;
+    public void setActRuTimerJobCollection(Collection<ActRuTimerJob> actRuTimerJobCollection) {
+        this.actRuTimerJobCollection = actRuTimerJobCollection;
     }
 
-    @XmlTransient
-    public List<ActRuTimerJob> getActRuTimerJobList1() {
-        return actRuTimerJobList1;
+    public Collection<ActRuTimerJob> getActRuTimerJobCollection1() {
+        return actRuTimerJobCollection1;
     }
 
-    public void setActRuTimerJobList1(List<ActRuTimerJob> actRuTimerJobList1) {
-        this.actRuTimerJobList1 = actRuTimerJobList1;
+    public void setActRuTimerJobCollection1(Collection<ActRuTimerJob> actRuTimerJobCollection1) {
+        this.actRuTimerJobCollection1 = actRuTimerJobCollection1;
     }
 
     @Override

@@ -5,28 +5,18 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import javax.persistence.*;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_ID_USER")
-@XmlRootElement
+@Table(name = "ACT_ID_USER", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActIdUser.findAll", query = "SELECT a FROM ActIdUser a")
-    , @NamedQuery(name = "ActIdUser.findById", query = "SELECT a FROM ActIdUser a WHERE a.id = :id")
-    , @NamedQuery(name = "ActIdUser.findByRev", query = "SELECT a FROM ActIdUser a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActIdUser.findByFirst", query = "SELECT a FROM ActIdUser a WHERE a.first = :first")
-    , @NamedQuery(name = "ActIdUser.findByLast", query = "SELECT a FROM ActIdUser a WHERE a.last = :last")
-    , @NamedQuery(name = "ActIdUser.findByEmail", query = "SELECT a FROM ActIdUser a WHERE a.email = :email")
-    , @NamedQuery(name = "ActIdUser.findByPwd", query = "SELECT a FROM ActIdUser a WHERE a.pwd = :pwd")
-    , @NamedQuery(name = "ActIdUser.findByPictureId", query = "SELECT a FROM ActIdUser a WHERE a.pictureId = :pictureId")})
+    @NamedQuery(name = "ActIdUser.findAll", query = "SELECT a FROM ActIdUser a")})
 public class ActIdUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +36,8 @@ public class ActIdUser implements Serializable {
     private String pwd;
     @Column(name = "PICTURE_ID_", length = 64)
     private String pictureId;
-    @ManyToMany(mappedBy = "actIdUserList", fetch = FetchType.LAZY)
-    private List<ActIdGroup> actIdGroupList;
+    @ManyToMany(mappedBy = "actIdUserCollection")
+    private Collection<ActIdGroup> actIdGroupCollection;
 
     public ActIdUser() {
     }
@@ -112,14 +102,15 @@ public class ActIdUser implements Serializable {
         this.pictureId = pictureId;
     }
 
-    @XmlTransient
-    public List<ActIdGroup> getActIdGroupList() {
-        return actIdGroupList;
+    public Collection<ActIdGroup> getActIdGroupCollection() {
+        return actIdGroupCollection;
     }
 
-    public void setActIdGroupList(List<ActIdGroup> actIdGroupList) {
-        this.actIdGroupList = actIdGroupList;
+    public void setActIdGroupCollection(Collection<ActIdGroup> actIdGroupCollection) {
+        this.actIdGroupCollection = actIdGroupCollection;
     }
+
+
 
     @Override
     public int hashCode() {

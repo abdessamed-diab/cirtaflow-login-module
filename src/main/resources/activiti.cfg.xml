@@ -10,10 +10,6 @@
         <property name="transactionManager" ref="activitiTransactionManager"/>
         <property name="asyncExecutorActivate" value="false"/>
         <property name="databaseSchemaUpdate" value="true"/>
-
-        <property name="jpaEntityManagerFactory" ref="jpaEntityManagerFactory" />
-        <property name="jpaCloseEntityManager" value="true" />
-        <property name="jpaHandleTransaction" value="true" />
     </bean>
 
     <bean name="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">

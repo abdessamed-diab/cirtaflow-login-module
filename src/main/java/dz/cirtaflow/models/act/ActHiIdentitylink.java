@@ -5,25 +5,23 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_IDENTITYLINK")
-@XmlRootElement
+@Table(name = "ACT_HI_IDENTITYLINK", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiIdentitylink.findAll", query = "SELECT a FROM ActHiIdentitylink a")
-    , @NamedQuery(name = "ActHiIdentitylink.findById", query = "SELECT a FROM ActHiIdentitylink a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiIdentitylink.findByGroupId", query = "SELECT a FROM ActHiIdentitylink a WHERE a.groupId = :groupId")
-    , @NamedQuery(name = "ActHiIdentitylink.findByType", query = "SELECT a FROM ActHiIdentitylink a WHERE a.type = :type")
-    , @NamedQuery(name = "ActHiIdentitylink.findByUserId", query = "SELECT a FROM ActHiIdentitylink a WHERE a.userId = :userId")
-    , @NamedQuery(name = "ActHiIdentitylink.findByTaskId", query = "SELECT a FROM ActHiIdentitylink a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiIdentitylink.findByProcInstId", query = "SELECT a FROM ActHiIdentitylink a WHERE a.procInstId = :procInstId")})
+    @NamedQuery(name = "ActHiIdentitylink.findAll", query = "SELECT a FROM ActHiIdentitylink a")})
 public class ActHiIdentitylink implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,36 +5,27 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_HI_ACTINST")
-@XmlRootElement
+@Table(name = "ACT_HI_ACTINST", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActHiActinst.findAll", query = "SELECT a FROM ActHiActinst a")
-    , @NamedQuery(name = "ActHiActinst.findById", query = "SELECT a FROM ActHiActinst a WHERE a.id = :id")
-    , @NamedQuery(name = "ActHiActinst.findByProcDefId", query = "SELECT a FROM ActHiActinst a WHERE a.procDefId = :procDefId")
-    , @NamedQuery(name = "ActHiActinst.findByProcInstId", query = "SELECT a FROM ActHiActinst a WHERE a.procInstId = :procInstId")
-    , @NamedQuery(name = "ActHiActinst.findByExecutionId", query = "SELECT a FROM ActHiActinst a WHERE a.executionId = :executionId")
-    , @NamedQuery(name = "ActHiActinst.findByActId", query = "SELECT a FROM ActHiActinst a WHERE a.actId = :actId")
-    , @NamedQuery(name = "ActHiActinst.findByTaskId", query = "SELECT a FROM ActHiActinst a WHERE a.taskId = :taskId")
-    , @NamedQuery(name = "ActHiActinst.findByCallProcInstId", query = "SELECT a FROM ActHiActinst a WHERE a.callProcInstId = :callProcInstId")
-    , @NamedQuery(name = "ActHiActinst.findByActName", query = "SELECT a FROM ActHiActinst a WHERE a.actName = :actName")
-    , @NamedQuery(name = "ActHiActinst.findByActType", query = "SELECT a FROM ActHiActinst a WHERE a.actType = :actType")
-    , @NamedQuery(name = "ActHiActinst.findByAssignee", query = "SELECT a FROM ActHiActinst a WHERE a.assignee = :assignee")
-    , @NamedQuery(name = "ActHiActinst.findByStartTime", query = "SELECT a FROM ActHiActinst a WHERE a.startTime = :startTime")
-    , @NamedQuery(name = "ActHiActinst.findByEndTime", query = "SELECT a FROM ActHiActinst a WHERE a.endTime = :endTime")
-    , @NamedQuery(name = "ActHiActinst.findByDuration", query = "SELECT a FROM ActHiActinst a WHERE a.duration = :duration")
-    , @NamedQuery(name = "ActHiActinst.findByDeleteReason", query = "SELECT a FROM ActHiActinst a WHERE a.deleteReason = :deleteReason")
-    , @NamedQuery(name = "ActHiActinst.findByTenantId", query = "SELECT a FROM ActHiActinst a WHERE a.tenantId = :tenantId")})
+    @NamedQuery(name = "ActHiActinst.findAll", query = "SELECT a FROM ActHiActinst a")})
 public class ActHiActinst implements Serializable {
 
     private static final long serialVersionUID = 1L;

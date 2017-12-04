@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(
@@ -99,4 +100,15 @@ public class ActivitiUserRepoTest implements Serializable {
         this.userRepo.deleteAll();
         assertEquals(Integer.valueOf(0), this.userRepo.count(), "result mismatch");
     }
+
+    @Test
+    public void testSaveExistingUser() {
+        Iterable<User> users= this.userRepo.findAll();
+        Integer value= this.userRepo.count();
+        assumeTrue(users.iterator().hasNext(), "assumption field.");
+        User user = users.iterator().next();
+        this.userRepo.saveUser(user);
+        assertEquals(value, this.userRepo.count(), "result did not match.");
+    }
+
 }

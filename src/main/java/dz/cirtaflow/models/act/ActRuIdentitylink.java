@@ -5,24 +5,25 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_RU_IDENTITYLINK")
-@XmlRootElement
+@Table(name = "ACT_RU_IDENTITYLINK", catalog = "activiti_cirtaflow_test", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "ActRuIdentitylink.findAll", query = "SELECT a FROM ActRuIdentitylink a")
-    , @NamedQuery(name = "ActRuIdentitylink.findById", query = "SELECT a FROM ActRuIdentitylink a WHERE a.id = :id")
-    , @NamedQuery(name = "ActRuIdentitylink.findByRev", query = "SELECT a FROM ActRuIdentitylink a WHERE a.rev = :rev")
-    , @NamedQuery(name = "ActRuIdentitylink.findByGroupId", query = "SELECT a FROM ActRuIdentitylink a WHERE a.groupId = :groupId")
-    , @NamedQuery(name = "ActRuIdentitylink.findByType", query = "SELECT a FROM ActRuIdentitylink a WHERE a.type = :type")
-    , @NamedQuery(name = "ActRuIdentitylink.findByUserId", query = "SELECT a FROM ActRuIdentitylink a WHERE a.userId = :userId")})
+    @NamedQuery(name = "ActRuIdentitylink.findAll", query = "SELECT a FROM ActRuIdentitylink a")})
 public class ActRuIdentitylink implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,13 +40,13 @@ public class ActRuIdentitylink implements Serializable {
     @Column(name = "USER_ID_", length = 255)
     private String userId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActReProcdef procDefId;
     @JoinColumn(name = "PROC_INST_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuExecution procInstId;
     @JoinColumn(name = "TASK_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActRuTask taskId;
 
     public ActRuIdentitylink() {

@@ -1,6 +1,8 @@
 package dz.cirtaflow.repositories.bpmnJpaRepository;
 
 import dz.cirtaflow.models.act.ActIdUser;
+import dz.cirtaflow.models.act.CfActIdUserAuthority;
+import dz.cirtaflow.repositories.bpmnJPARepository.AuthorityRepository;
 import dz.cirtaflow.repositories.bpmnJPARepository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +26,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
                 "classpath:testApplicationContext.xml"  ,
                 "classpath:test.activiti.cfg.xml"
         })
-public class UserRepositoryTest implements Serializable {
+public class    UserRepositoryTest implements Serializable {
     private static final Logger LOG= LogManager.getLogger(UserRepositoryTest.class);
 
     private String firstname= "salah";
@@ -33,9 +35,13 @@ public class UserRepositoryTest implements Serializable {
     private String password= "Abdessamed178";
 
     private ActIdUser user;
+    private CfActIdUserAuthority auth;
 
     @Autowired(required = true)
     private UserRepository userRepository;
+
+    @Autowired(required = true)
+    private AuthorityRepository authorityRepository;
 
     public UserRepositoryTest() {
         LOG.traceEntry();
@@ -50,13 +56,21 @@ public class UserRepositoryTest implements Serializable {
         this.user.setEmail(this.email);
         this.user.setPwd(password);
 
-        this.userRepository.save(this.user);
+        if(!userRepository.existsByEmail(user.getEmail()))
+            this.user= this.userRepository.save(this.user);
+
+        auth= new CfActIdUserAuthority("ROLE_USER", this.user.getEmail());
+        if(!authorityRepository.existsByEmail(auth.getEmail()))
+            auth= this.authorityRepository.save(auth);
     }
 
     @AfterEach
     public void afterEach() {
         if(userRepository.existsById(user.getId()))
             this.userRepository.deleteById(this.user.getId());
+
+        if(authorityRepository.existsByEmail(auth.getEmail()))
+            authorityRepository.deleteById(this.auth.getId());
     }
 
     @Test
@@ -70,5 +84,20 @@ public class UserRepositoryTest implements Serializable {
     public void deleteAll() {
         this.userRepository.deleteAll();
         assertEquals(0, this.userRepository.count(), "result mismatch.");
+    }
+
+    @Test
+    public void saveUserWithAuthorities() {
+        Optional<CfActIdUserAuthority> auth= this.authorityRepository.findByEmail(this.user.getEmail());
+        assumeTrue(auth.isPresent(), "assumption field");
+        assertEquals("ROLE_USER", auth.get().getAuthority());
+    }
+
+    @Test
+    public void deleteAllCFUserAndActUser() {
+        this.authorityRepository.deleteAll();
+        assertEquals(0, this.authorityRepository.count(), "result mismatch");
+        this.userRepository.deleteAll();
+        assertEquals(0, userRepository.count(), "result mismatch");
     }
 }

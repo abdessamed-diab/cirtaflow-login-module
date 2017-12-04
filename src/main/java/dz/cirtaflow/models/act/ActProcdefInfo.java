@@ -5,22 +5,28 @@
  */
 package dz.cirtaflow.models.act;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author diab
  */
 @Entity
-@Table(name = "ACT_PROCDEF_INFO", uniqueConstraints = {
+@Table(name = "ACT_PROCDEF_INFO", catalog = "activiti_cirtaflow_test", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"PROC_DEF_ID_"})})
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ActProcdefInfo.findAll", query = "SELECT a FROM ActProcdefInfo a")
-    , @NamedQuery(name = "ActProcdefInfo.findById", query = "SELECT a FROM ActProcdefInfo a WHERE a.id = :id")
-    , @NamedQuery(name = "ActProcdefInfo.findByRev", query = "SELECT a FROM ActProcdefInfo a WHERE a.rev = :rev")})
+    @NamedQuery(name = "ActProcdefInfo.findAll", query = "SELECT a FROM ActProcdefInfo a")})
 public class ActProcdefInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,10 +37,10 @@ public class ActProcdefInfo implements Serializable {
     @Column(name = "REV_")
     private Integer rev;
     @JoinColumn(name = "INFO_JSON_ID_", referencedColumnName = "ID_")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ActGeBytearray infoJsonId;
     @JoinColumn(name = "PROC_DEF_ID_", referencedColumnName = "ID_", nullable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @OneToOne(optional = false)
     private ActReProcdef procDefId;
 
     public ActProcdefInfo() {
