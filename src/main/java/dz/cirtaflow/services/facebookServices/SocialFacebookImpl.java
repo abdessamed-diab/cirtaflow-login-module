@@ -44,7 +44,7 @@ public class SocialFacebookImpl implements SocialFacebook, InitializingBean {
         LOG.info("init bean.");
         connectionFactory= new FacebookConnectionFactory(this.appId, this.appSecret, this.appName);
         url=  "https://graph.facebook.com/v2.10/oauth/access_token?client_id="+appId
-                +"&redirect_uri=http://localhost:8080/facebookredirect&client_secret="+appSecret+"&code=";
+                +"&redirect_uri="+REMOUTE_HOST_ADDRESS+"/facebookredirect&client_secret="+appSecret+"&code=";
         initOAuth2Params();
     }
 
@@ -60,7 +60,7 @@ public class SocialFacebookImpl implements SocialFacebook, InitializingBean {
 //        if(mobile) params.set("display", "touch");
 //        else params.set("display", "page");
 
-        params.setRedirectUri("http://localhost:8080/facebookredirect");
+        params.setRedirectUri(REMOUTE_HOST_ADDRESS+"/facebookredirect");
 
         return params;
     }
@@ -99,7 +99,7 @@ public class SocialFacebookImpl implements SocialFacebook, InitializingBean {
         OAuth2Operations OAuth2RequestScoped= new OAuth2Template(this.appId, this.appSecret,
                 getAuthorizeUrl(), normalizeUrl(url+code) );
 
-        return OAuth2RequestScoped.exchangeForAccess(code, "http://localhost:8080/facebookredirect",
+        return OAuth2RequestScoped.exchangeForAccess(code, REMOUTE_HOST_ADDRESS+"/facebookredirect",
                 null);
     }
 

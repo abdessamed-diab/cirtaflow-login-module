@@ -18,6 +18,10 @@ import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 public interface SocialFacebook extends Serializable{
     Logger LOG= LogManager.getLogger(SocialFacebook.class);
+
+    String REMOUTE_HOST_ADDRESS="https://f89ac997.ngrok.io";
+    String LOCALE_HOST_ADDRESS= "localhost:8080";
+
     String EMAIL             =     "email"              ;
     String PUBLISH_ACTIONS   =     "publish_actions"    ;
     String USER_ABOUT_ME     =     "user_about_me"      ;

@@ -227,7 +227,7 @@ public class LoginController implements Serializable, Closeable, InitializingBea
                         new GrantedAuthority() {
                             @Override
                             public String getAuthority() {
-                                return "ROLE_ADMIN";
+                                return "ROLE_USER";
                             }
                         })
         );
