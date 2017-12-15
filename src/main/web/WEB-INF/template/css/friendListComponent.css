@@ -1,0 +1,65 @@
+.ui-friend-list-div {
+    background-color: #222222;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-left: 1px solid hsla(160, 50%, 5%, 0.5);
+}
+.ui-friend-div {
+    background-color: #222;
+    padding: 4px 0;
+    color: hsla(0, 100%, 100%, 0.75);
+}
+.ui-friend-div:hover {
+    background-color: hsla(50, 5%, 10%, 1);
+    padding: 4px 0;
+    /*color: hsla(160, 50%, 50%, 0.5);*/
+}
+.ui-friend-text {
+    text-align: center;
+    font-weight: bold;
+    font-stretch: expanded;
+    font-size: 13px;
+    font-family: "Courier New";
+    position: relative;
+    top: 10px;
+}
+.ui-friend-text:hover {
+    text-align: center;
+    font-weight: bold;
+    font-stretch: expanded;
+    font-size: 13px;
+    font-family: "Courier New";
+    position: relative;
+    top: 10px;
+}
+
+.ui-friend-profile-picture {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: 6px;
+    border-radius: 32px;
+}
+
+.ui-friend-menu-profile-picture {
+    width: 128px;
+    height: 128px;
+    border-radius: 2px;
+    margin-top: 16px;
+}
+
+
+.ui-friend-menu {
+    z-index: 10;
+    background-color: hsla(160, 50%, 5%, 0.5);
+    box-shadow: 0 0 4px 4px #222;
+    color: hsla(0, 100%, 100%, 0.75);
+    border-radius: 8px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 256px;
+    height: 128px;
+}

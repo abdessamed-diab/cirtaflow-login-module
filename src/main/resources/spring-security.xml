@@ -39,8 +39,9 @@
         <csrf disabled="true" />
 
         <x509 subject-principal-regex="CN=(.*?)," />
-    </http>
 
+    </http>
+    
     <!--<authentication-manager id="defaultAuthenticationManager">-->
         <!--<authentication-provider>-->
             <!--<user-service id="inMemoryUserDetailsService">-->

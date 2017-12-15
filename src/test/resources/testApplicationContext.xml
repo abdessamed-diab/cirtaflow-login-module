@@ -47,7 +47,7 @@
                 hibernate.ejb.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy
                 hibernate.show_sql=false
                 hibernate.format_sql=true
-                spring.jpa.hibernate.ddl-auto=update
+                spring.jpa.hibernate.ddl-auto=none
             </value>
         </property>
     </bean>

@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 
 import CommentBox from './commentBox/CommentBox.js'
 import Popup from "./dialog/Popup.js";
+import FriendListComponent from "./friendList/FriendListComponent";
 
 class App extends React.Component {
   render () {
@@ -17,15 +18,20 @@ class App extends React.Component {
 }
 
 // render(<App/>, document.getElementById('comment-box'));
+// render(
+//     <Popup visibility='hidden'
+//            toggleButtonValue='register'
+//            width='300'
+//            height='600'
+//            popupHeaderText='header text'
+//            root='/api'
+//            formName="register_form"
+//     >
+//     </Popup>,
+//     document.getElementById('popup')
+// );
+
 render(
-    <Popup visibility='visible'
-           toggleButtonValue='register'
-           width='300'
-           height='600'
-           popupHeaderText='header text'
-           root='/api'
-           formName="register_form"
-    >
-    </Popup>,
-    document.getElementById('popup')
-);
+    <FriendListComponent friendMenuHeight='164' friendMenuWidth='360'/>,
+    document.getElementById('friendListComponent')
+)
