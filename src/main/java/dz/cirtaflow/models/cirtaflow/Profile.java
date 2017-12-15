@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
-@Entity
+@Entity(name = "PROFILE")
 @Table(name = "CF_PROFILE")
 @Embeddable
 public class Profile extends FacebookObject implements Serializable{

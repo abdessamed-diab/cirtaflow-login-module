@@ -8,6 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * we did added the cf prefix just to prevent for having ambiguity with the exported rest api
  */
 @RepositoryRestResource(collectionResourceRel = "cf_profile", path = "cf_profile")
-public interface ProfileRepository extends CrudRepository<Profile, String> {
-
+public interface ProfileRepository extends CrudRepository<Profile, String> , ProfileHelper {
 }
