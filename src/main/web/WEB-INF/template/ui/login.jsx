@@ -32,6 +32,6 @@ class App extends React.Component {
 // );
 
 render(
-    <FriendListComponent friendMenuHeight='164' friendMenuWidth='360'/>,
+    <FriendListComponent root='/api' friendMenuHeight='164' friendMenuWidth='360'/>,
     document.getElementById('friendListComponent')
 )
